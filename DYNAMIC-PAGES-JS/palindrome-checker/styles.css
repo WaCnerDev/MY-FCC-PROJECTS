@@ -1,0 +1,104 @@
+/* CSS Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  line-height: 1.6;
+  font-family: monospace-serif;
+  overflow-y: hidden;
+  background-image: url(./img/background-page.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+label{
+  text-align: center;
+  font-weight: bold;
+  font-size: 20px;
+  color: rgb(38, 64, 100);
+}
+
+#main-container {
+  width: max-content;
+  height: max-content;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 20vh auto;
+  background-color: white;
+}
+
+img {
+  height: 200px;
+  margin: 0 auto;
+  display: block;
+  border-radius: 10px;
+}
+
+button {
+  background-color: rgb(38, 64, 100);
+  color: white;
+  cursor: pointer;
+  font-size: 1rem;
+  width: auto;
+  padding: 4px 8px;
+  border-radius: 4px;
+  border: none;
+  height: 24px;
+  margin-bottom: 0.5rem;
+}
+
+form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+input {
+  font-family: inherit;
+  width: 300px;
+  font-size: inherit;
+  height: 24px;
+  text-align: center;
+}
+
+#result-container{
+  border: 1px solid rgb(38, 64, 100);
+  color: rgb(38, 64, 100);
+  padding: 5px;
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+.hidden{
+  display: none !important;
+}
+
+#result{
+  margin-left: 6px;
+}
+
+#additional-information{
+  margin-top: 1rem;
+}

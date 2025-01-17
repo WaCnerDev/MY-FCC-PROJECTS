@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Telephone Number Validator</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+  </head>
+  <body>
+    <div id="main-container">
+      <img
+        id="freecodecamp-logo"
+        src="https://cdn.freecodecamp.org/platform/universal/fcc_primary.svg"
+        alt="freeCodeCamp Logo"
+      />
+      <h1>Telephone Number Validator</h1>
+      <form>
+        <div id="camera"></div>
+        <div id="screen">
+          <label for="telephone">Enter a phone number:</label>
+          <input
+            type="text"
+            id="user-input"
+            name="telephone"
+            placeholder="555-555-5555"
+          />
+          <div id="btn-container">
+            <button id="check-btn" type="submit">Check</button>
+            <button id="clear-btn" type="clear">Clear</button>
+          </div>
+          <div id="btn-phone-container">
+            <i class="bi bi-copy"></i>
+            <i class="bi bi-square"></i>
+            <i class="bi bi-chevron-left"></i>
+          </div>
+          <div id="results-div"></div>
+        </div>
+      </form>
+    </div>
+  </body>
+  <script src="script.js"></script>
+</html>

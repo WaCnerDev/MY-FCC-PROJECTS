@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gamer form</title>
+  <link rel="stylesheet" href="../survey_form/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+  <h1 id="title">GAMER FORM</h1>
+  <form id="survey-form">
+    <fieldset>
+      <legend>Form Description:</legend>
+      <p id="description">
+        Welcome to our form for gamers! We are excited to meet passionate gamers like you.
+        Please take a few minutes to complete this form and let us know a little more about
+        you and your interests in the world of gaming.
+      </p>
+    </fieldset>
+    <fieldset>
+      <label id="name-label">Name</label>
+      <input id="name" type="text" placeholder="Enter your name" required />
+    </fieldset>
+    <fieldset>
+      <label id="email-label">Email</label>
+      <input id="email" type="email" placeholder="Enter your email" required />
+    </fieldset>
+    <fieldset>
+      <label id="number-label">Age (optional)</label>
+      <input id="number" type="number" min="12" max="120" placeholder="Enter your age" require />
+    </fieldset>
+    <fieldset>
+      <p for="dropdown" class="question">Choose your favorite video game category:</p>
+      <select id="dropdown">
+        <option value="">Action</option>
+        <option value="1">Adventure</option>
+        <option value="2">Role-Playing Games (RPG)</option>
+        <option value="3">First-Person Shooter (FPS)</option>
+        <option value="4">Strategy</option>
+        <option value="5">Simulation</option>
+      </select>
+    </fieldset>
+    <fieldset>
+      <p class="question">Why do you play video games?</p>
+      <div class="containers">
+        <label for="A"><input class="inline" name="reason" id="entertainment" value="A" type="radio" />Entertainment and
+          Fun</label>
+        <label for="B"><input class="inline" name="reason" id="challenge" value="B" type="radio" />Challenge and
+          Overcoming</label>
+        <label for="C"><input class="inline" name="reason" id="socialization" value="C"
+            type="radio" />Socialization</label>
+        <label for="D"><input class="inline" name="reason" id="escape" value="D" type="radio" />Escape from
+          stress</label>
+      </div>
+    </fieldset>
+    <fieldset>
+      <p class="question">Which of these games have you played?</p>
+      <div id="main_container">
+        <div class="containers">
+          <label for="Z" class="opc"><input class="inline" name="nocX" id="f" value="f"
+              type="checkbox" />Fortnite</label>
+          <label class="opc"><input class="inline" name="nocX" id="au" value="au" type="checkbox" />Among Us</label>
+          <label for="Z"><input class="inline" name="nocX" id="cod" value="cod" type="checkbox" />Call of Duty:
+            Warzone</label>
+          <label for="Z"><input class="inline" name="nocX" id="mine" value="mine" type="checkbox" />Minecraft</label>
+          <label for="Z"><input class="inline" name="nocX" id="lol" value="lol" type="checkbox" />League of
+            Legends</label>
+        </div>
+        <div class="containers">
+          <label for="Z">
+            <input class="inline" name="nocX" id="valo" value="valo" type="checkbox" />Valorant
+          </label>
+          <label for="Z">
+            <input class="inline" name="nocX" id="gta" value="gta" type="checkbox" />Grand Theft Auto V
+          </label>
+          <label for="Z">
+            <input class="inline" name="nocX" id="zelda" value="zelda" type="checkbox" />The Legend of Zelda: Breath of
+            the Wild</label>
+          <label for="Z">
+            <input class="inline" name="nocX" id="cyber" value="cyber" type="checkbox" />Cyberpunk 2077
+          </label>
+          <label for="Z">
+            <input class="inline" name="nocX" id="apex" value="apex" type="checkbox" />Apex Legends
+          </label>
+        </div>
+      </div>
+    </fieldset>
+    <fieldset>
+      <p>
+        In recent times, there has been a lot of talk about the representation of gender, race, and diversity in video
+        games. Do you have examples of games that you think are doing a good job of addressing these issues, and how you
+        think inclusion can enrich gaming culture in general?
+      </p>
+      <textarea type="textarea" id="comment"  placeholder="Enter your opinion"></textarea>
+    </fieldset>
+    <button type="submit" id="submit">Send Reply</button>
+  </form>
+</body>
+</html>

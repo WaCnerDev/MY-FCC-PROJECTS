@@ -1,0 +1,177 @@
+:root {
+	--nav-width: 20%;
+	--margin-p: 12px;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+*,
+::after,
+::before {
+	box-sizing: border-box;
+	padding: 0px;
+	margin: 0px;
+}
+
+body {
+	display: flex;
+	flex: 1;
+	font-family: 'Open Sans', Arial, sans-serif;
+	color: #323330;
+	width: 100vw;
+	position: relative;
+	overflow-x: hidden;
+}
+
+#main-doc {
+	width: calc(100vw - var(--nav-width));
+	margin-left: calc(var(--nav-width));
+	padding: 3vh 1vw 3vh 3vw;
+}
+
+#navbar {
+	width: var(--nav-width);
+	background-color: white;
+	max-width: 400px;
+	position: fixed;
+	border-right: solid 3px rgb(150, 150, 150);
+	display: flex;
+	flex-direction: column;
+}
+
+#navbarMovile {
+	display: none;
+}
+
+.nav-link {
+	flex: 1;
+	padding: 5% 0 5% 22px;
+	border-bottom: solid 1px;
+	text-decoration: none;
+}
+
+p:not(code p) {
+	margin-bottom: 1rem;
+	line-height: 1.5;
+	margin-left: var(--margin-p);
+}
+
+#navbar header {
+	text-align: center;
+	color: #323330;
+	padding: 16px 0px 22px 0px;
+	border-bottom: solid 1px #323330;
+}
+
+
+header:not(#navbarMovile header) {
+	font-size: 1.8rem;
+	color: #323330;
+}
+
+#main-doc header {
+	padding: 16px 0;
+}
+
+ul {
+	padding-left: calc(40px + var(--margin-p));
+}
+
+ul li {
+	margin: 16px 0;
+}
+
+code {
+	display: inline-block;
+	width: 100%;
+	padding: 16px;
+	margin-bottom: 16px;
+	background-color: rgb(235, 235, 235);
+	border-radius: 10px;
+}
+
+code p {
+	line-height: 1.5;
+}
+
+a:last-of-type{
+	color: blue;
+}
+
+
+/* para tablets */
+@media (max-width: 768px) {
+	#navbar {
+		display: none;
+	}
+
+
+	#navbarMovile {
+		flex-direction: column;
+		width: 100%;
+		background-color: #f0db4f;
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		z-index: 1;
+		padding: 20px 0;
+	}
+
+	#navbarMovile header{
+		text-align: center;
+		font-size: 2rem;
+		color: #323330;
+		margin-bottom: 16px;
+	}
+
+	#navSelect{
+		height: 40px;
+		padding-left: 10px;
+		border-radius: 10px;
+		border-right: solid 16px transparent;
+		border-left:none ;
+		border-top: none;
+		border-bottom: none;
+		font-size: 1rem;
+		margin: 0 10%;
+	}
+
+	#menu-toggle {
+		font-size: 32px;
+		width: 50px;
+		height: 50px;
+		background-color: #f0db4f;
+		border-radius: 50%;
+		border: none;
+		cursor: pointer;
+		position:fixed;
+		bottom: 65px;
+		right: 10px;
+		z-index: 2; 
+	}
+	
+	#main-doc {
+		width: 100%;
+		margin: 0 10%;
+		padding-left: 0;
+		padding-right: 0;
+
+	}
+
+	.nav-link {
+		flex:1;
+		padding-left: 20px;
+		border-bottom: solid 1px;
+		text-decoration: none;
+	}
+
+}
+
+/* para celulares*/
+@media (max-width: 520px) {
+	#navbarMovile header{
+		font-size: 1.5rem;
+	}
+}
