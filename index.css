@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
+*,
 *:before,
 *:after {
   box-sizing: border-box;
@@ -16,7 +17,7 @@ body {
 main {
   width: 80%;
   margin: auto;
-  padding-bottom: 2rem;
+  margin-bottom: 2rem;
 }
 
 h1 {
@@ -33,10 +34,11 @@ h1 {
   align-items: center;
   width: 100%;
   padding-block: 50px;
-  & p {
-    font-size: 1.5rem;
-    width: 50%;
-  }
+}
+
+#intro p {
+  font-size: 1.5rem;
+  width: 50%;
 }
 
 .title-course {
@@ -55,30 +57,30 @@ h1 {
   background-color: #404268;
   border-radius: 10px;
   position: relative;
+}
 
-  & .preview-project {
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    width: 100%;
-    height: 60%;
-  }
+.card .preview-project {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  width: 100%;
+  height: 60%;
 }
 
 .info-container {
   padding: 10px;
+}
 
-  & * {
-    margin-block: 6px;
-  }
+.info-container * {
+  margin-block: 6px;
+}
 
-  & p {
-    font-size: 1.5rem;
-    line-height: 1.5em;
-    height: 2em;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-  }
+.info-container p {
+  font-size: 1.5rem;
+  line-height: 1.5em;
+  height: 2em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .btn-view-project {
@@ -116,13 +118,10 @@ h1 {
   html,
   body {
     overflow-x: hidden;
-    margin: 0;
-    padding: 0;
     width: 100%;
   }
 
   main {
-    margin: auto;
     width: 100%;
     max-width: 100vw;
   }
@@ -140,16 +139,18 @@ h1 {
     padding: 0;
     width: 100%;
     overflow: hidden;
-    & p {
-      width: 95%;
-      align-self: center;
-    }
-
-    & svg {
-      width: 90%;
-      height: auto;
-    }
   }
+
+  #intro p {
+    width: 95%;
+    align-self: center;
+  }
+
+  #intro svg {
+    width: 90%;
+    height: auto;
+  }
+
   .title-course svg {
     width: 40px;
     height: 40px;
@@ -177,7 +178,7 @@ h1 {
     padding-left: 1rem;
   }
 
-  #projects{
+  #projects {
     overflow: hidden;
   }
 }
