@@ -1,21 +1,184 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 body {
-  font-family: Arial, sans-serif;
-  margin: 20px;
-  padding: 0;
+  font-family: "Source Sans Pro", sans-serif;
+  background-color: #2A2A40;
+  color: white;
+}
+
+main {
+  width: 80%;
+  margin: auto;
+  margin-bottom: 2rem;
+}
+
+h1 {
+  width: 800px;
   text-align: center;
+  font-size: 3.625rem;
+  margin: auto;
+  margin-top: 2rem;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
+
+#intro {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding-block: 50px;
 }
-li {
-  margin: 10px 0;
+
+#intro p {
+  font-size: 1.5rem;
+  width: 50%;
 }
-a {
-  text-decoration: none;
-  color: #007BFF;
+
+.title-course {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: left;
+  width: 100%;
+}
+
+.card {
+  width: 40%;
+  min-width: 400px;
+  min-height: 350px;
+  max-height: 400px;
+  background-color: #404268;
+  border-radius: 10px;
+  position: relative;
+}
+
+.card .preview-project {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  width: 100%;
+  height: 60%;
+}
+
+.info-container {
+  padding: 10px;
+}
+
+.info-container * {
+  margin-block: 6px;
+}
+
+.info-container p {
+  font-size: 1.5rem;
+  line-height: 1.5em;
+  height: 2em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.btn-view-project {
+  height: 35px;
+  width: 150px;
+  background-color: #2A2A40;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding-inline: 18px;
+  padding-block: 5px;
   font-size: 18px;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
 }
-a:hover {
-  color: #0056b3;
+
+.btn-view-project:hover {
+  background-color: #de9f39;
+  cursor: pointer;
+}
+
+.project-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-between;
+  width: 90%;
+  margin: auto;
+  margin-block: 12px;
+}
+
+@media screen and (max-width: 768px) {
+
+  html,
+  body {
+    overflow-x: hidden;
+    width: 100%;
+  }
+
+  main {
+    width: 100%;
+    max-width: 100vw;
+  }
+
+  html {
+    font-size: 12px;
+  }
+
+  h1 {
+    width: 100vw;
+  }
+
+  #intro {
+    flex-direction: column;
+    padding: 0;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  #intro p {
+    width: 95%;
+    align-self: center;
+  }
+
+  #intro svg {
+    width: 90%;
+    height: auto;
+  }
+
+  .title-course svg {
+    width: 40px;
+    height: 40px;
+  }
+
+  .project-cards {
+    justify-content: center;
+    margin: 0 auto;
+  }
+
+  .info-container h3 {
+    font-size: 1.7rem;
+  }
+
+  .card {
+    min-width: 350px;
+    width: 85vw;
+  }
+
+  .carousel {
+    margin-top: 2rem;
+  }
+
+  .title-course {
+    padding-left: 1rem;
+  }
+
+  #projects {
+    overflow: hidden;
+  }
 }
