@@ -67,19 +67,26 @@ h1 {
 }
 
 .info-container {
-  padding: 10px;
+  padding: 0.625rem;
+  height: 25%;
 }
 
 .info-container * {
   margin-block: 6px;
 }
 
-.info-container p {
+.info-container h3 {
   font-size: 1.5rem;
+  margin-top: 0;
+}
+
+.info-container p {
+  font-size: 1rem;
   line-height: 1.5em;
   height: 2em;
   text-overflow: ellipsis;
   white-space: nowrap;
+  margin:0;
   overflow: hidden;
 }
 
@@ -89,17 +96,37 @@ h1 {
   background-color: #2A2A40;
   color: white;
   border: none;
-  border-radius: 10px;
+  border-radius: 5px;
   padding-inline: 18px;
   padding-block: 5px;
-  font-size: 18px;
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
+  font-size: 1rem;
+}
+
+.status{
+  display: inline-block;
+  text-align: center;
+  align-content: center;
+  height: 35px;
+  width: 150px;
+  border-radius: 5px;
+}
+
+.development{
+  background-color: rgb(222, 57, 57);
+}
+
+.completed{
+  background-color: #19802e;
+}
+
+.status-container{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 }
 
 .btn-view-project:hover {
-  background-color: #de9f39;
+  transform: scale(1.1);
   cursor: pointer;
 }
 
