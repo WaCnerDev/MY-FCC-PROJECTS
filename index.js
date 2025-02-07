@@ -79,6 +79,13 @@ const projects = [
     image: "./image/preview_phone-validator.webp",
     link: "./DYNAMIC-PAGES-JS/phone-validator/phone-validator.html",
     category: "dynamicPagesJS"
+  },
+  {
+    title: "Cash Register",
+    description: "A cash register that tells you how to return the change.",
+    image: "./image/preview_cash-register.webp",
+    link: "./DYNAMIC-PAGES-JS/cash-register/cash-register.html",
+    category: "dynamicPagesJS"
   }
 ];
 
