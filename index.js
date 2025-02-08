@@ -5,16 +5,15 @@ const dynamicPagesJS = document.querySelector(
   "#dynamic-pages-js .project-cards"
 );
 
-
 function fromStatusToColor(status) {
-  if (status ==="Development") {
+  if (status === "Development") {
     return "development";
   } else {
     return "completed";
-  } 
+  }
 }
 
-function renderCards(title, description,status, image) {
+function renderCards(title, description, status, image, link) {
   const card = document.createElement("div");
   card.classList.add("card");
   card.innerHTML = `
@@ -24,25 +23,17 @@ function renderCards(title, description,status, image) {
       <p>${description}</p>
   </div>
   <div class="status-container">
-    <p class="status ${fromStatusToColor(status)}" ">${status}</p>
-    <button class="btn-view-project">View Project</button>
+    <p class="status ${fromStatusToColor(status)}">${status}</p>
   </div>
   `;
+  const btn = document.createElement("button");
+  btn.classList.add("btn-view-project");
+  btn.textContent = "View Project";
+  btn.addEventListener("click", () => { window.open(link, "_blank") });
+  card.children[2].appendChild(btn);
   return card;
 }
 
-
-
-function redirect(link){
-  window.open(link, "_blank");
-}
-
-function applyEventListeners(link){
-  const btnViewProject = document.getElementsByClassName("btn-view-project");
-  for (let i = 0; i < btnViewProject.length; i++) {
-    btnViewProject[i].addEventListener("click", () => redirect(link));
-  }
-}
 
 const projects = [
   {
@@ -51,15 +42,15 @@ const projects = [
     image: "./image/preview_form.webp",
     status: "Development",
     link: "./WEB-RESPONSIVE/survey-form/survey-form.html",
-    category: "responsiveWebDesing"
+    category: "responsiveWebDesing",
   },
   {
     title: "Technical Documentation",
     description: "A technical documentation page with a clean design.",
     image: "./image/preview_technical_doc.webp",
     status: "Completed",
-    link: "./WEB-RESPONSIVE/technical-doc/technical-doc.html",
-    category: "responsiveWebDesing"
+    link: "./WEB-RESPONSIVE/tecnical-doc/tecnical-doc.html",
+    category: "responsiveWebDesing",
   },
   {
     title: "Landing Page Trombones",
@@ -67,31 +58,32 @@ const projects = [
     image: "./image/preview_store_trombones.webp",
     status: "Completed",
     link: "./WEB-RESPONSIVE/trombones-store/trombones-store.html",
-    category: "responsiveWebDesing"
+    category: "responsiveWebDesing",
   },
   {
     title: "Tribute Page",
     description: "A tribute page to a historical figure.",
     image: "./image/preview_tribute_page.webp",
     status: "Development",
-    link: "./WEB-RESPONSIVE/tribute-page/tribute-page.html",
-    category: "responsiveWebDesing"
+    link: "./WEB-RESPONSIVE/tribute-pages/tribute-pages.html",
+    category: "responsiveWebDesing",
   },
   {
     title: "Personal Portfolio",
     description: "A personal portfolio page.",
     image: "./image/preview_personal_portfolio.webp",
     status: "Development",
-    link: "./WEB-RESPONSIVE/personal-portfolio/personal-portfolio.html",
-    category: "responsiveWebDesing"
+    link: "./WEB-RESPONSIVE/personal-portafolio/personal-portafolio.html",
+    category: "responsiveWebDesing",
   },
   {
     title: "Palindrome Checker",
-    description: "Enter a word and it will tell you if it is a palindrome or not.",
+    description:
+      "Enter a word and it will tell you if it is a palindrome or not.",
     image: "./image/preview_palindrome.webp",
     status: "Completed",
     link: "./DYNAMIC-PAGES-JS/palindrome-checker/palindrome-checker.html",
-    category: "dynamicPagesJS"
+    category: "dynamicPagesJS",
   },
   {
     title: "Number Converter",
@@ -99,7 +91,7 @@ const projects = [
     image: "./image/preview_num-to-roman.webp",
     status: "Development",
     link: "./DYNAMIC-PAGES-JS/num-to-roman/num-to-roman.html",
-    category: "dynamicPagesJS"
+    category: "dynamicPagesJS",
   },
   {
     title: "Phone Number Validator",
@@ -107,7 +99,7 @@ const projects = [
     image: "./image/preview_phone-validator.webp",
     status: "Development",
     link: "./DYNAMIC-PAGES-JS/phone-validator/phone-validator.html",
-    category: "dynamicPagesJS"
+    category: "dynamicPagesJS",
   },
   {
     title: "Cash Register",
@@ -115,13 +107,18 @@ const projects = [
     image: "./image/preview_cash-register.webp",
     status: "Completed",
     link: "./DYNAMIC-PAGES-JS/cash-register/cash-register.html",
-    category: "dynamicPagesJS"
-  }
+    category: "dynamicPagesJS",
+  },
 ];
 
-projects.forEach(project => {
-  const card = renderCards(project.title, project.description, project.status, project.image);
-  applyEventListeners(project.link);
+projects.forEach((project) => {
+  const card = renderCards(
+    project.title,
+    project.description,
+    project.status,
+    project.image,
+    project.link
+  );
   if (project.category === "responsiveWebDesing") {
     responsiveWebDesing.appendChild(card);
   } else if (project.category === "dynamicPagesJS") {
