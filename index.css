@@ -59,6 +59,10 @@ h1 {
   position: relative;
 }
 
+.carousel:not(:first-child) {
+  margin-top: 2rem;
+}
+
 .card .preview-project {
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
@@ -159,10 +163,12 @@ h1 {
 
   h1 {
     width: 100vw;
+    margin-bottom: 1rem;
   }
 
   #intro {
     flex-direction: column;
+    gap: 1rem;
     padding: 0;
     width: 100%;
     overflow: hidden;
@@ -192,17 +198,23 @@ h1 {
     font-size: 1.7rem;
   }
 
+  .info-container p {
+    font-size: 1.5rem;
+  }
+
   .card {
     min-width: 350px;
     width: 85vw;
   }
 
-  .carousel {
-    margin-top: 2rem;
-  }
+
 
   .title-course {
     padding-left: 1rem;
+  }
+
+  .btn-view-project, .status {
+    font-size: 1.5rem;
   }
 
   #projects {
