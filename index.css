@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
 *,
-*:before,
-*:after {
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -21,11 +21,10 @@ main {
 }
 
 h1 {
-  width: 800px;
+  max-width: 800px;
   text-align: center;
   font-size: 3.625rem;
-  margin: auto;
-  margin-top: 2rem;
+  margin: 2rem auto 0;
 }
 
 #intro {
@@ -33,7 +32,7 @@ h1 {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding-block: 50px;
+  padding-top: 50px;
 }
 
 #intro p {
@@ -45,22 +44,14 @@ h1 {
   display: flex;
   gap: 12px;
   align-items: center;
-  justify-content: left;
   width: 100%;
 }
 
 .card {
-  width: 40%;
-  min-width: 400px;
-  min-height: 350px;
-  max-height: 400px;
+  width: 100%;
+  height: 100%;
   background-color: #404268;
   border-radius: 10px;
-  position: relative;
-}
-
-.carousel:not(:first-child) {
-  margin-top: 2rem;
 }
 
 .card .preview-project {
@@ -90,7 +81,6 @@ h1 {
   height: 2em;
   text-overflow: ellipsis;
   white-space: nowrap;
-  margin:0;
   overflow: hidden;
 }
 
@@ -101,12 +91,17 @@ h1 {
   color: white;
   border: none;
   border-radius: 5px;
-  padding-inline: 18px;
-  padding-block: 5px;
+  padding: 5px 18px;
   font-size: 1rem;
+  transition: transform 0.3s;
 }
 
-.status{
+.btn-view-project:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+.status {
   display: inline-block;
   text-align: center;
   align-content: center;
@@ -115,37 +110,34 @@ h1 {
   border-radius: 5px;
 }
 
-.development{
-  background-color: rgb(222, 57, 57);
+.development {
+  background-color: #de3939;
 }
 
-.completed{
+.completed {
   background-color: #19802e;
 }
 
-.status-container{
+.status-container {
   display: flex;
   align-items: center;
   justify-content: space-around;
 }
 
-.btn-view-project:hover {
-  transform: scale(1.1);
-  cursor: pointer;
+.project-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px,500px));
+  grid-auto-rows: 400px;
+  gap: 16px;
+  justify-content:center ;
 }
 
-.project-cards {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: space-between;
-  width: 90%;
-  margin: auto;
-  margin-block: 12px;
+.title-course {
+  padding-left: 1rem;
+  margin-block: 2rem;
 }
 
 @media screen and (max-width: 768px) {
-
   html,
   body {
     overflow-x: hidden;
@@ -166,6 +158,10 @@ h1 {
     margin-bottom: 1rem;
   }
 
+  h2{
+    font-size: 2rem;
+  }
+
   #intro {
     flex-direction: column;
     gap: 1rem;
@@ -184,14 +180,10 @@ h1 {
     height: auto;
   }
 
+
   .title-course svg {
     width: 40px;
     height: 40px;
-  }
-
-  .project-cards {
-    justify-content: center;
-    margin: 0 auto;
   }
 
   .info-container h3 {
@@ -202,22 +194,17 @@ h1 {
     font-size: 1.5rem;
   }
 
-  .card {
-    min-width: 350px;
-    width: 85vw;
-  }
-
-
-
-  .title-course {
-    padding-left: 1rem;
-  }
-
-  .btn-view-project, .status {
+  .btn-view-project,
+  .status {
     font-size: 1.5rem;
   }
 
   #projects {
     overflow: hidden;
+  }
+
+  .project-cards {
+    grid-template-columns: repeat(auto-fill, minmax(350px,1fr));
+    padding-inline: 1rem;
   }
 }
