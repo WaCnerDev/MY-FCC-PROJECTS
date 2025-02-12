@@ -8,6 +8,9 @@
   --drawer-bg: #d4d4d4;
   --key-bg: #464646;
   --key-color: white;
+  --highlight-yellow: #ffd105;
+  --highlight-red: #db6b5c;
+  --highlight-green: #5eb95b;
 }
 
 *,
@@ -34,13 +37,19 @@ form {
   gap: 8px;
 }
 
+form button,
+form input {
+  width: 300px;
+  height: 35px;
+  font-size: 1.5rem;
+}
 
 form button {
- width: 300px; 
-  height: 35px;
-  padding-left: 8px;
+  background-color: var(--button-bg-color);
+  border-radius: 8px;
+  border: none;
   max-width: 400px;
-  font-size: 1.5rem;
+  padding-left: 8px;
 }
 
 .input-container {
@@ -57,20 +66,11 @@ form button {
   left: 10px;
   top: 50%;
   transform: translateY(-50%);
-  pointer-events: none; /* Asegura que el pseudo-elemento no interfiera con la interacción del input */
+  pointer-events: none;
 }
 
 form input {
-  width: 100%;
   padding-left: 24px;
-  height: 35px;
-  font-size: 1.5rem;
-}
-
-form button {
-  background-color: var(--button-bg-color);
-  border-radius: 8px;
-  border: none;
 }
 
 form label {
@@ -115,7 +115,7 @@ button:hover {
   width: 100%;
 }
 
-#screen #change-due{
+#screen #change-due {
   display: inline-block;
   width: auto;
   align-content: center;
@@ -139,22 +139,6 @@ button:hover {
   background-color: var(--keyboard-bg);
 }
 
-.key:nth-child(4){
-  grid-column: 4 / 6;
-}
-
-.key:nth-child(8){
-  grid-column: 4 / 6;
-}
-
-.key:nth-child(12){
-  grid-column: 4 / 6;
-}
-
-.key:nth-child(16){
-  grid-column: 4 / 6;
-}
-
 .key {
   cursor: pointer;
   border: none;
@@ -163,6 +147,13 @@ button:hover {
   background-color: var(--key-bg);
   text-transform: uppercase;
   font-weight: bold;
+}
+
+.key:nth-child(4),
+.key:nth-child(8),
+.key:nth-child(12),
+.key:nth-child(16) {
+  grid-column: 4 / 6;
 }
 
 #drawer {
@@ -184,7 +175,7 @@ button:hover {
   position: absolute;
   top: 475px;
   left: 50%;
-  transform: translate(-50%, 0); 
+  transform: translate(-50%, 0);
   border: 6px solid var(--drawer-border-color);
 }
 
@@ -200,23 +191,23 @@ button:hover {
 }
 
 .yellow {
-  background-color: #ffd105;
+  background-color: var(--highlight-yellow);
 }
 
 .red {
-  background-color: #db6b5c;
+  background-color: var(--highlight-red);
 }
 
 .green {
-  background-color: #5eb95b;
+  background-color: var(--highlight-green);
 }
 
 .special:not(:last-child) {
-  color:#464646;
+  color: var(--cash-register-bg);
   font-weight: bold;
 }
 
-.value-in-drawer{
+.value-in-drawer {
   text-align: center;
   border: 2px solid var(--drawer-border-color);
 }

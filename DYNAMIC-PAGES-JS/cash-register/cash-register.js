@@ -29,21 +29,39 @@ const changeElement = document.getElementById("change-due");
 const cashInDrawerElement = document.getElementById("cash-in-drawer");
 let scrollInterval;
 
+// Display functions
 const printPrice = () => {
   totalElement.innerHTML = "";
   totalElement.innerHTML += `Total: $${parseFloat(price)}`;
 };
 
-const calculateChange = () => {
-  return (cashInput.value - price).toFixed(2);
+const generateResult = (status) => {
+  changeElement.innerHTML = "";
+  const cashFromClient = parseFloat(cashInput.value);
+  let result = "Enter the total amount to be paid";
+  if (cashFromClient < price) {
+    result = "Customer does not have enough money to purchase the item";
+  } else if (cashFromClient == price) {
+    result = "No change due - customer paid with exact cash";
+  } else if (status) {
+    result = "Status: " + status;
+    if (status != "INSUFFICIENT_FUNDS") {
+      for (let i = 0; i < changeArray.length; i++) {
+        result += " " + changeArray[i][0] + ": $" + changeArray[i][1] + " ";
+      }
+    }
+  }
+  for (let i = 0; i < 3; i++) {
+    changeElement.innerHTML += `<span>${result}</span>`;
+  }
 };
 
-const calculateCashInDrawer = () => {
-  let total = 0;
+const displayCashInDrawer = () => {
+  cashInDrawerElement.innerHTML = "";
   cid.forEach((element) => {
-    total += element[1];
+    cashInDrawerElement.innerHTML += `<p class="value-in-drawer">${element[0]}: $${element[1]}</p>`;
   });
-  return total.toFixed(2);
+  cashInDrawerElement.innerHTML += `<p class="value-in-drawer"><b>TOTAL: $${calculateCashInDrawer()}</b></p>`;
 };
 
 const scrollText = () => {
@@ -61,6 +79,19 @@ const scrollText = () => {
       scrollPosition = containerWidth - 18;
     }
   }, 200);
+};
+
+// Calculation functions
+const calculateChange = () => {
+  return (cashInput.value - price).toFixed(2);
+};
+
+const calculateCashInDrawer = () => {
+  let total = 0;
+  cid.forEach((element) => {
+    total += element[1];
+  });
+  return total.toFixed(2);
 };
 
 const canGiveChange = () => {
@@ -100,6 +131,7 @@ const defineStatus = () => {
   }
 };
 
+// User interaction functions
 const showAlerts = () => {
   const cashFromClient = cashInput.value;
   const priceToPay = price;
@@ -110,45 +142,10 @@ const showAlerts = () => {
   }
 };
 
-const generateResult = (status) => {
-  changeElement.innerHTML = "";
-  const cashFromClient = parseFloat(cashInput.value);
-  let result = "Enter the total amount to be paid";
-  if (cashFromClient < price) {
-    result = "Customer does not have enough money to purchase the item";
-  } else if (cashFromClient == price) {
-    result = "No change due - customer paid with exact cash";
-  } else if (status) {
-    result = "Status: " + status;
-    if (status != "INSUFFICIENT_FUNDS") {
-      for (let i = 0; i < changeArray.length; i++) {
-        result += " " + changeArray[i][0] + ": $" + changeArray[i][1] + " ";
-      }
-    }
-  }
-  for (let i = 0; i < 3; i++) {
-    changeElement.innerHTML += `<span>${result}</span>`;
-  }
-};
-
 const clearDisplay = () => {
   price = 0;
   printPrice();
   generateResult();
-};
-
-const displayCashInDrawer = () => {
-  cashInDrawerElement.innerHTML = "";
-  cid.forEach((element) => {
-    cashInDrawerElement.innerHTML += `<p class="value-in-drawer">${element[0]}: $${element[1]}</p>`;
-  });
-  cashInDrawerElement.style.gridTemplateColumns = "1fr 1fr";
-  cashInDrawerElement.innerHTML += `<p class="value-in-drawer"><b>TOTAL: $${calculateCashInDrawer()}</b></p>`;
-  const lastSpace = cashInDrawerElement.lastElementChild;
-  const antepenultimateSpace =
-    cashInDrawerElement.children[cashInDrawerElement.children.length - 2];
-  lastSpace.style.gridColumn = "1 / -1";
-  antepenultimateSpace.style.gridColumn = "1 / -1";
 };
 
 const updatePrice = (newDigit) => {
@@ -176,6 +173,7 @@ const deleteDigit = () => {
   generateResult();
 };
 
+// Event listeners
 document.querySelectorAll(".key").forEach((button) => {
   button.addEventListener("click", () => {
     const value = button.getAttribute("data-value");
@@ -183,6 +181,12 @@ document.querySelectorAll(".key").forEach((button) => {
       clearDisplay();
     } else if (value === "open") {
       cashInDrawerElement.style.display = "grid";
+      cashInDrawerElement.style.gridTemplateColumns = "1fr 1fr";
+      const lastSpace = cashInDrawerElement.lastElementChild;
+      const antepenultimateSpace =
+        cashInDrawerElement.children[cashInDrawerElement.children.length - 2];
+      lastSpace.style.gridColumn = "1 / -1";
+      antepenultimateSpace.style.gridColumn = "1 / -1";
       displayCashInDrawer();
     } else if (value === "close") {
       cashInDrawerElement.style.display = "none";
@@ -191,16 +195,10 @@ document.querySelectorAll(".key").forEach((button) => {
     } else if (value === "delete") {
       deleteDigit();
     } else {
-      console.log(value);
       updatePrice(value);
-      console.log(price);
     }
   });
 });
-
-printPrice();
-generateResult();
-scrollText();
 
 purchase.addEventListener("click", (e) => {
   e.preventDefault();
@@ -210,3 +208,8 @@ purchase.addEventListener("click", (e) => {
   showAlerts();
   cashInput.value = "";
 });
+
+// Initial setup
+printPrice();
+generateResult();
+scrollText();
