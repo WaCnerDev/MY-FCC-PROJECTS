@@ -1,4 +1,4 @@
-let price = 19.5;
+let price = 0;
 let cid = [
   ["PENNY", 1.01],
   ["NICKEL", 2.05],
@@ -26,13 +26,12 @@ const cashInput = document.getElementById("cash");
 const purchase = document.getElementById("purchase-btn");
 const totalElement = document.getElementById("total");
 const changeElement = document.getElementById("change-due");
+const cashInDrawerElement = document.getElementById("cash-in-drawer");
 let scrollInterval;
-const generateNewPrice = () => {
-  price = (Math.random() * 100).toFixed(2);
-};
 
 const printPrice = () => {
-  totalElement.innerHTML += `Total: $${price}`;
+  totalElement.innerHTML = "";
+  totalElement.innerHTML += `Total: $${parseFloat(price)}`;
 };
 
 const calculateChange = () => {
@@ -44,7 +43,7 @@ const calculateCashInDrawer = () => {
   cid.forEach((element) => {
     total += element[1];
   });
-  return total;
+  return total.toFixed(2);
 };
 
 const scrollText = () => {
@@ -54,7 +53,7 @@ const scrollText = () => {
   let scrollPosition = 0;
   const textWidth = changeElement.offsetWidth;
   const containerWidth = changeElement.parentElement.offsetWidth;
-  scrollInterval =setInterval(() => {
+  scrollInterval = setInterval(() => {
     scrollPosition -= 15;
     changeElement.style.transform = `translateX(${scrollPosition}px)`;
     if (-scrollPosition > textWidth) {
@@ -76,6 +75,7 @@ const canGiveChange = () => {
     while (remainingChange >= value && available > 0) {
       remainingChange = (remainingChange - value).toFixed(2);
       available -= value;
+      cid[i][1] -= value;
       amountToReturn += value;
     }
 
@@ -95,6 +95,7 @@ const defineStatus = () => {
   } else if (cashInDrawer == changeDue) {
     return "CLOSED";
   } else if (cashInDrawer > changeDue && haveChange) {
+    price = 0;
     return "OPEN";
   }
 };
@@ -111,17 +112,92 @@ const showAlerts = () => {
 
 const generateResult = (status) => {
   changeElement.innerHTML = "";
-  let result = "########################";
-  if (status) {
+  const cashFromClient = parseFloat(cashInput.value);
+  let result = "Enter the total amount to be paid";
+  if (cashFromClient < price) {
+    result = "Customer does not have enough money to purchase the item";
+  } else if (cashFromClient == price) {
+    result = "No change due - customer paid with exact cash";
+  } else if (status) {
     result = "Status: " + status;
-    for (let i = 0; i < changeArray.length; i++) {
-      result += " " + changeArray[i][0] + ": $" + changeArray[i][1] + " ";
+    if (status != "INSUFFICIENT_FUNDS") {
+      for (let i = 0; i < changeArray.length; i++) {
+        result += " " + changeArray[i][0] + ": $" + changeArray[i][1] + " ";
+      }
     }
   }
   for (let i = 0; i < 3; i++) {
-    changeElement.innerHTML += `<span> ${result} </span>`;
+    changeElement.innerHTML += `<span>${result}</span>`;
   }
 };
+
+const clearDisplay = () => {
+  price = 0;
+  printPrice();
+  generateResult();
+};
+
+const displayCashInDrawer = () => {
+  cashInDrawerElement.innerHTML = "";
+  cid.forEach((element) => {
+    cashInDrawerElement.innerHTML += `<p class="value-in-drawer">${element[0]}: $${element[1]}</p>`;
+  });
+  cashInDrawerElement.style.gridTemplateColumns = "1fr 1fr";
+  cashInDrawerElement.innerHTML += `<p class="value-in-drawer"><b>TOTAL: $${calculateCashInDrawer()}</b></p>`;
+  const lastSpace = cashInDrawerElement.lastElementChild;
+  const antepenultimateSpace =
+    cashInDrawerElement.children[cashInDrawerElement.children.length - 2];
+  lastSpace.style.gridColumn = "1 / -1";
+  antepenultimateSpace.style.gridColumn = "1 / -1";
+};
+
+const updatePrice = (newDigit) => {
+  if (newDigit === ".") {
+    if (price.toString().includes(".")) {
+      return; // Ya hay un punto decimal, no hacer nada
+    } else {
+      price = price.toString() + "."; // Concatenar el punto decimal como cadena
+    }
+  } else if (newDigit === "0" && price === 0) {
+    return; // Evitar agregar ceros al inicio si el precio es 0
+  } else {
+    price = price.toString() + newDigit; // Concatenar dígitos como cadena
+  }
+  printPrice();
+  generateResult();
+};
+
+const deleteDigit = () => {
+  price = parseFloat(price.toString().slice(0, -1));
+  if (!price) {
+    price = 0;
+  }
+  printPrice();
+  generateResult();
+};
+
+document.querySelectorAll(".key").forEach((button) => {
+  button.addEventListener("click", () => {
+    const value = button.getAttribute("data-value");
+    if (value === "clear") {
+      clearDisplay();
+    } else if (value === "open") {
+      cashInDrawerElement.style.display = "grid";
+      displayCashInDrawer();
+    } else if (value === "close") {
+      cashInDrawerElement.style.display = "none";
+    } else if (value === "enter") {
+      purchase.click();
+    } else if (value === "delete") {
+      deleteDigit();
+    } else {
+      console.log(value);
+      updatePrice(value);
+      console.log(price);
+    }
+  });
+});
+
 printPrice();
 generateResult();
 scrollText();
@@ -129,6 +205,7 @@ scrollText();
 purchase.addEventListener("click", (e) => {
   e.preventDefault();
   generateResult(defineStatus());
+  displayCashInDrawer();
   scrollText();
   showAlerts();
   cashInput.value = "";

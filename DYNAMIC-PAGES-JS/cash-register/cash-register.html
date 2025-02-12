@@ -8,7 +8,7 @@
   </head>
   <body>
     <form>
-      <label>Enter cash from customer: </label>
+      <label>ENTER CASH FROM CUSTOMER: </label>
       <div class="input-container">
         <input type="number" id="cash" />
       </div>
@@ -21,25 +21,28 @@
         <p id="total"></p>
       </div>
       <div id="keyboard">
-        <button class="key">1</button>
-        <button class="key">2</button>
-        <button class="key">3</button>
-        <button class="key special">esc</button>
-        <button class="key green"></button>
-        <button class="key">4</button>
-        <button class="key">5</button>
-        <button class="key">6</button>
-        <button class="key">0</button>
-        <button class="key yellow"></button>
-        <button class="key">7</button>
-        <button class="key">8</button>
-        <button class="key">9</button>
-        <button class="key special">open</button>
-        <button class="key red"></button>
+        <button class="key" data-value="1">1</button>
+        <button class="key" data-value="2">2</button>
+        <button class="key" data-value="3">3</button>
+        <button class="key special green" data-value="open">open</button>
+        <button class="key" data-value="4">4</button>
+        <button class="key" data-value="5">5</button>
+        <button class="key" data-value="6">6</button>
+        <button class="key special red" data-value="close">close</button>
+        <button class="key" data-value="7">7</button>
+        <button class="key" data-value="8">8</button>
+        <button class="key" data-value="9">9</button>
+        <button class="key special yellow" data-value="clear">clear</button>
+        <button class="key" data-value=".">.</button>
+        <button class="key" data-value="0">0</button>
+        <button class="key" data-value="delete">&larr;</button>
+        <button class="key special" data-value="enter">enter</button>
       </div>
       <div id="drawer">
         <div id="knob"></div>
       </div>
+    </div>
+    <div id="cash-in-drawer">
     </div>
   </body>
   <script src="cash-register.js"></script>
