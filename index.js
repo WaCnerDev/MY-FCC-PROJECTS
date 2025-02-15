@@ -1,3 +1,4 @@
+
 const responsiveWebDesing = document.querySelector(
   "#responsive-web .project-cards"
 );
@@ -26,14 +27,11 @@ function renderCards(title, description, status, image, link) {
     <p class="status ${fromStatusToColor(status)}">${status}</p>
   </div>
   `;
-  const btn = document.createElement("button");
-  btn.classList.add("btn-view-project");
-  btn.textContent = "View Project";
-  btn.addEventListener("click", () => { window.open(link, "_blank") });
-  card.children[2].appendChild(btn);
+  card.addEventListener("click", () => {
+    window.open(link, "_blank");
+  });
   return card;
 }
-
 
 const projects = [
   {

@@ -84,20 +84,8 @@ h1 {
   overflow: hidden;
 }
 
-.btn-view-project {
-  height: 35px;
-  width: 150px;
-  background-color: #2A2A40;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 5px 18px;
-  font-size: 1rem;
-  transition: transform 0.3s;
-}
-
-.btn-view-project:hover {
-  transform: scale(1.1);
+.card:hover {
+  transform: scale(1.05);
   cursor: pointer;
 }
 
@@ -194,7 +182,6 @@ h1 {
     font-size: 1.5rem;
   }
 
-  .btn-view-project,
   .status {
     font-size: 1.5rem;
   }
