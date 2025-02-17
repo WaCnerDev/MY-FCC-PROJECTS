@@ -41,7 +41,7 @@ function formatDate(date) {
 }
 
 function truncateDescription(description) {
-  const maxLength = window.innerWidth <= 480 ? 40 : 110;
+  const maxLength = window.innerWidth <= 768 ? 200 : 150;
   if (description.length > maxLength) {
     return description.substring(0, maxLength) + "...";
   }
