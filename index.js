@@ -40,6 +40,14 @@ function formatDate(date) {
   }
 }
 
+function truncateDescription(description) {
+  const maxLength = window.innerWidth <= 480 ? 40 : 110;
+  if (description.length > maxLength) {
+    return description.substring(0, maxLength) + "...";
+  }
+  return description;
+}
+
 function renderCards(title, description, status, image, link, lastUpdate) {
   const card = document.createElement("div");
   card.classList.add("card");
@@ -47,7 +55,7 @@ function renderCards(title, description, status, image, link, lastUpdate) {
     <img class="preview-project" src="${image}" alt="${title}" />
     <div class="info-container"> 
       <h3><b>${title}</b></h3>
-      <p>${description}</p>
+      <p class="project-description">${truncateDescription(description)}</p>
       <div class="row">
         <div class="field">
           <p class="bold-label">Status:</p>  
@@ -69,7 +77,7 @@ function renderCards(title, description, status, image, link, lastUpdate) {
 const projects = [
   {
     title: "Survey Form",
-    description: "A simple and responsive survey form.",
+    description: "A form that collects information about your gaming preferences. This project taught you about the basic structure of an HTML form, accessibility improvements, input types, validations, and responsive design.",
     image: "./image/preview_form.webp",
     status: "Development",
     link: "./WEB-RESPONSIVE/survey-form/survey-form.html",
