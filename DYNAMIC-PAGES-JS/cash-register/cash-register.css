@@ -1,0 +1,213 @@
+:root {
+  --background-color: #3d3d5f;
+  --button-bg-color: #fdad00;
+  --form-color: white;
+  --cash-register-bg: #464646;
+  --keyboard-bg: #d4d4d4;
+  --drawer-border-color: #707070;
+  --drawer-bg: #d4d4d4;
+  --key-bg: #464646;
+  --key-color: white;
+  --highlight-yellow: #ffd105;
+  --highlight-red: #db6b5c;
+  --highlight-green: #5eb95b;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--background-color);
+  position: relative;
+  padding-bottom: 10vh;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--form-color);
+  margin-top: 80px;
+  gap: 8px;
+}
+
+form button,
+form input {
+  width: 300px;
+  height: 35px;
+  font-size: 1.5rem;
+}
+
+form button {
+  background-color: var(--button-bg-color);
+  border-radius: 8px;
+  border: none;
+  max-width: 400px;
+  padding-left: 8px;
+}
+
+.input-container {
+  position: relative;
+  display: inline-block;
+  width: 300px;
+}
+
+.input-container::before {
+  content: '$';
+  font-size: 1.5rem;
+  position: absolute;
+  color: black;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+form input {
+  padding-left: 24px;
+}
+
+form label {
+  text-align: center;
+  max-width: 300px;
+  font-size: 1.5rem;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+#cash-register {
+  width: 300px;
+  background-color: var(--cash-register-bg);
+  margin: 30px auto;
+  position: relative;
+  border-radius: 10px;
+}
+
+#cash-register #screen {
+  width: 100%;
+  height: 100px;
+  background-color: #fff;
+  border-radius: 10px;
+  border: 18px solid var(--cash-register-bg);
+  font-size: 1.2rem;
+  white-space: nowrap;
+  text-transform: uppercase;
+  overflow: hidden;
+}
+
+#cash-register #screen p {
+  height: 50%;
+  padding-inline: 10px;
+}
+
+#screen #total {
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  width: 100%;
+}
+
+#screen #change-due {
+  display: inline-block;
+  width: auto;
+  align-content: center;
+}
+
+#screen #change-due span:not(:last-child) {
+  padding-right: 44px;
+}
+
+#keyboard {
+  display: grid;
+  grid-template-columns: repeat(5, 30px);
+  grid-template-rows: repeat(4, 30px);
+  gap: 10px;
+  justify-content: center;
+  align-content: center;
+  width: 100%;
+  border-radius: 10px 10px 0 0;
+  padding: 40px 0 20px;
+  margin-bottom: -10px;
+  background-color: var(--keyboard-bg);
+}
+
+.key {
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  color: var(--key-color);
+  background-color: var(--key-bg);
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.key:nth-child(4),
+.key:nth-child(8),
+.key:nth-child(12),
+.key:nth-child(16) {
+  grid-column: 4 / 6;
+}
+
+#drawer {
+  width: 100%;
+  height: 80px;
+  background-color: var(--drawer-bg);
+  border: 10px solid var(--drawer-border-color);
+  border-radius: 10px;
+  position: relative;
+}
+
+#cash-in-drawer {
+  display: none;
+  background-color: var(--drawer-bg);
+  padding: 12px;
+  width: 300px;
+  border-radius: 10px;
+  margin: 0 auto;
+  position: absolute;
+  top: 475px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  border: 6px solid var(--drawer-border-color);
+}
+
+#drawer #knob {
+  width: 20px;
+  height: 20px;
+  background-color: var(--drawer-border-color);
+  border-radius: 50%;
+  position: absolute;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.yellow {
+  background-color: var(--highlight-yellow);
+}
+
+.red {
+  background-color: var(--highlight-red);
+}
+
+.green {
+  background-color: var(--highlight-green);
+}
+
+.special:not(:last-child) {
+  color: var(--cash-register-bg);
+  font-weight: bold;
+}
+
+.value-in-drawer {
+  text-align: center;
+  border: 2px solid var(--drawer-border-color);
+}
