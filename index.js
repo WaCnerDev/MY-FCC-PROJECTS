@@ -77,16 +77,16 @@ function renderCards(title, description, status, image, link, lastUpdate) {
 const projects = [
   {
     title: "Survey Form",
-    description: "A form that collects information about your gaming preferences. This project taught you about the basic structure of an HTML form, accessibility improvements, input types, validations, and responsive design.",
+    description: "A user-friendly form to collect information about your gaming preferences, designed with accessibility and responsiveness in mind.",
     image: "./image/preview_form.webp",
-    status: "Development",
+    status: "Completed",
     link: "./WEB-RESPONSIVE/survey-form/survey-form.html",
     category: "responsiveWebDesing",
     lastUpdate: "2024-05-12T14:30:00",
   },
   {
     title: "Technical Documentation",
-    description: "A technical documentation page with a clean design.",
+    description: "JavaScript documentation website featuring sections, a navigation menu, and a responsive layout.",
     image: "./image/preview_technical_doc.webp",
     status: "Completed",
     link: "./WEB-RESPONSIVE/tecnical-doc/tecnical-doc.html",
@@ -95,7 +95,7 @@ const projects = [
   },
   {
     title: "Landing Page Trombones",
-    description: "A landing page for a trombone store.",
+    description: "Landing page for trombone sales with video, product section, and intuitive navigation.",
     image: "./image/preview_store_trombones.webp",
     status: "Completed",
     link: "./WEB-RESPONSIVE/trombones-store/trombones-store.html",
@@ -104,7 +104,7 @@ const projects = [
   },
   {
     title: "Tribute Page",
-    description: "A tribute page to a historical figure.",
+    description: "A tribute page dedicated to Nikola Tesla, highlighting his life, achievements, and legacy.",
     image: "./image/preview_tribute_page.webp",
     status: "Development",
     link: "./WEB-RESPONSIVE/tribute-pages/tribute-pages.html",
@@ -113,7 +113,7 @@ const projects = [
   },
   {
     title: "Personal Portfolio",
-    description: "A personal portfolio page.",
+    description: "A portfolio of web development projects, showcasing skills, technologies, and the various projects I have developed.",
     image: "./image/preview_personal_portfolio.webp",
     status: "Development",
     link: "./WEB-RESPONSIVE/personal-portafolio/personal-portafolio.html",
@@ -123,16 +123,16 @@ const projects = [
   {
     title: "Palindrome Checker",
     description:
-      "Enter a word and it will tell you if it is a palindrome or not.",
+      "This website allows users to check if a word or phrase is a palindrome.",
     image: "./image/preview_palindrome.webp",
-    status: "Completed",
+    status: "Development",
     link: "./DYNAMIC-PAGES-JS/palindrome-checker/palindrome-checker.html",
     category: "dynamicPagesJS",
     lastUpdate: "2024-09-14T10:10:00",
   },
   {
     title: "Number Converter",
-    description: "Convert natural numbers to Roman numerals.",
+    description: "This tool allows you to convert numbers between different number systems quickly and easily, including binary, hexadecimal, octal.",
     image: "./image/preview_num-to-roman.webp",
     status: "Development",
     link: "./DYNAMIC-PAGES-JS/num-to-roman/num-to-roman.html",
@@ -141,7 +141,7 @@ const projects = [
   },
   {
     title: "Phone Number Validator",
-    description: "Verify if a phone number is valid.",
+    description: "Easily check the validity of U.S. phone numbers, no matter how they are formatted.",
     image: "./image/preview_phone-validator.webp",
     status: "Development",
     link: "./DYNAMIC-PAGES-JS/phone-validator/phone-validator.html",
@@ -150,7 +150,7 @@ const projects = [
   },
   {
     title: "Cash Register",
-    description: "A cash register that tells you how to return the change.",
+    description: "This cash register app calculates change, displays the remaining cash in the drawer, and handles various transaction scenarios.",
     image: "./image/preview_cash-register.webp",
     status: "Completed",
     link: "./DYNAMIC-PAGES-JS/cash-register/cash-register.html",
