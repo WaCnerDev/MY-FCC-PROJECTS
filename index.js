@@ -143,7 +143,7 @@ const projects = [
     title: "Phone Number Validator",
     description: "Easily check the validity of U.S. phone numbers, no matter how they are formatted.",
     image: "./image/preview_phone-validator.webp",
-    status: "Development",
+    status: "Completed",
     link: "./DYNAMIC-PAGES-JS/phone-validator/phone-validator.html",
     category: "dynamicPagesJS",
     lastUpdate: "2025-02-01T14:50:00",
