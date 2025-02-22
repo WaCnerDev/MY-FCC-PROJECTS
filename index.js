@@ -125,7 +125,7 @@ const projects = [
     description:
       "This website allows users to check if a word or phrase is a palindrome.",
     image: "./image/preview_palindrome.webp",
-    status: "Development",
+    status: "Completed",
     link: "./DYNAMIC-PAGES-JS/palindrome-checker/palindrome-checker.html",
     category: "dynamicPagesJS",
     lastUpdate: "2024-09-14T10:10:00",
