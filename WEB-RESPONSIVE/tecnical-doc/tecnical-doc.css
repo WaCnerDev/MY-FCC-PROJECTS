@@ -7,8 +7,8 @@
 ::after,
 ::before {
 	box-sizing: border-box;
-	padding: 0px;
-	margin: 0px;
+	padding: 0;
+	margin: 0;
 }
 
 body {
@@ -23,20 +23,19 @@ body {
 }
 
 #main-doc {
-	width: 80%;
+	width: calc(100% - var(--nav-width));
 	max-height: 100vh;
 	overflow-y: auto;
-	padding-block: 32px;
-	padding-inline: 5%;
+	padding: 32px 5%;
 	scroll-behavior: smooth;
 }
 
 #navbar {
-	width: 20%;
+	width: var(--nav-width);
 	min-width: 200px;
 	max-height: 100vh;
 	background-color: white;
-	border-right: solid 3px rgb(150, 150, 150);
+	border-right: 3px solid rgb(150, 150, 150);
 	display: flex;
 	flex-direction: column;
 	overflow-y: auto;
@@ -44,10 +43,9 @@ body {
 
 .nav-link {
 	color: #323330;
-	padding: 5% 0 5% 22px;
-	border-bottom: solid 1px;
+	padding: 5% 0 12px 22px;
+	border-bottom: 1px solid;
 	text-decoration: none;
-	padding-bottom: 12px;
 }
 
 .nav-link:hover {
@@ -55,17 +53,16 @@ body {
 }
 
 p:not(code p) {
-	margin-bottom: 1rem;
+	margin: 0 0 1rem var(--margin-p);
 	line-height: 1.5;
-	margin-left: var(--margin-p);
 }
 
 #navbar header {
 	font-size: 24px;
 	text-align: center;
 	color: #323330;
-	padding: 16px 0px 22px 0px;
-	border-bottom: solid 1px #323330;
+	padding: 16px 0 22px;
+	border-bottom: 1px solid #323330;
 }
 
 #main-doc header {
@@ -98,7 +95,7 @@ code p {
 	display: none;
 }
 
-/* para tablets */
+/* para celulares y tablets */
 @media (max-width: 768px) {
 	#navbar {
 		display: none;
@@ -125,20 +122,13 @@ code p {
 	}
 
 	.nav-link {
-		flex: 1;
 		padding-left: 20px;
-		border-bottom: solid 1px;
+		border-bottom: 1px solid;
 		text-decoration: none;
 	}
-	#navbar header{
+
+	#navbar header {
 		font-size: 20px;
 		font-weight: 400;
 	}
-}
-
-/* para celulares */
-@media (max-width: 520px) {
-
-
-
 }
