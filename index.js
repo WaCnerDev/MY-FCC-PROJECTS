@@ -106,7 +106,7 @@ const projects = [
     title: "Tribute Page",
     description: "A tribute page dedicated to Nikola Tesla, highlighting his life, achievements, and legacy.",
     image: "./image/preview_tribute_page.webp",
-    status: "Development",
+    status: "Completed",
     link: "./WEB-RESPONSIVE/tribute-pages/tribute-pages.html",
     category: "responsiveWebDesing",
     lastUpdate: "2025-01-10T12:00:00",
