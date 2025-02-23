@@ -1,6 +1,7 @@
 const btnConvert = document.getElementById("convert-btn");
 const input = document.getElementById("number");
 const output = document.getElementById("output");
+const type = document.getElementById("type");
 
 const validateInput = (input) => {
   if (input === "") {
@@ -22,14 +23,14 @@ const showErrorMessage = (message) => {
   output.classList.remove("hidden");
 };
 
-
 const showOutput = (result) => {
   output.innerText = result;
   output.classList.remove("hidden");
   output.classList.remove("error-msg");
-}
+};
 
 const convertToRoman = (num) => {
+  output.style.textTransform = "uppercase";
   const romanNumeral = {
     M: 1000,
     CM: 900,
@@ -57,11 +58,91 @@ const convertToRoman = (num) => {
   return roman;
 };
 
+const convertToGreek = (num) => {
+  let numInt = parseInt(num);
+  output.style.textTransform = "none";
+  const greekNumeral = {
+    1: 'α',
+    2: 'β',
+    3: 'γ',
+    4: 'δ',
+    5: 'ε',
+    6: 'ϛ',
+    7: 'ζ',
+    8: 'η',
+    9: 'θ',
+    10: 'ι',
+    20: 'κ',
+    30: 'λ',
+    40: 'μ',
+    50: 'ν',
+    60: 'ξ',
+    70: 'ο',
+    80: 'π',
+    90: 'ϟ',
+    100: 'ρ',
+    200: 'σ',
+    300: 'τ',
+    400: 'υ',
+    500: 'φ',
+    600: 'χ',
+    700: 'ψ',
+    800: 'ω',
+    900: 'ϡ',
+  };
+  if(greekNumeral[numInt]){
+    return greekNumeral[numInt];
+  }else{
+    let greek = "";
+    const keys = Object.keys(greekNumeral).reverse();
+    for (let key of keys) {
+      while (numInt >= key) {
+      greek += greekNumeral[key];
+      numInt -= key;
+      }
+    }
+    return greek;
+  }
+};
+
+const convertToBinary = (num) => {
+  return parseInt(num).toString(2);
+};
+
+const convertToHexadecimal = (num) => {
+  return parseInt(num).toString(16).toUpperCase();
+};
+
+const convertToOctal = (num) => {
+  return parseInt(num).toString(8);
+};
+
 btnConvert.addEventListener("click", (e) => {
   e.preventDefault();
   const number = input.value;
   if (validateInput(number)) {
-    const romanNumeral = convertToRoman(number);
-    showOutput(romanNumeral);
+    const selectedType = type.value;
+    let result;
+    switch (selectedType) {
+      case "roman":
+        result = convertToRoman(number);
+        break;
+      case "greek":
+        result = convertToGreek(number);
+        break;
+      case "binary":
+        result = convertToBinary(number);
+        break;
+      case "hexadecimal":
+        result = convertToHexadecimal(number);
+        break;
+      case "octal":
+        result = convertToOctal(number);
+        break;
+      default:
+        showErrorMessage("Invalid conversion type selected");
+        return;
+    }
+    showOutput(result);
   }
 });
