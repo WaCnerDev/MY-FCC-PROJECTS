@@ -134,7 +134,7 @@ const projects = [
     title: "Number Converter",
     description: "This tool allows you to convert numbers between different number systems quickly and easily, including binary, hexadecimal, octal.",
     image: "./image/preview_num-to-roman.webp",
-    status: "Development",
+    status: "Completed",
     link: "./DYNAMIC-PAGES-JS/num-to-roman/num-to-roman.html",
     category: "dynamicPagesJS",
     lastUpdate: "2024-12-25T08:30:00",
