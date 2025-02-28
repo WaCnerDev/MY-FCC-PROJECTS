@@ -1,0 +1,284 @@
+@import url('https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Tilt+Neon&display=swap');
+
+/* CSS Reset */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+h1 {
+  font-size: 3rem;
+  text-align: center;
+}
+
+header img {
+  width: 100%;
+  height: 30px;
+  margin-top: 12px;
+}
+
+header {
+  font-family: 'Silkscreen', sans-serif;
+  width: 100%;
+  height: auto;
+  color: white;
+}
+
+body {
+  background-color: #3b3b4f;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+#case-gameboy {
+  width: 400px;
+  height: 650px;
+  background-color: #f5c700;
+  margin: 0 auto;
+  margin-block: 32px;
+  border-radius: 10px;
+  padding: 16px;
+  position: relative;
+  box-shadow: 6px 6px 0px 10px #36497e;
+}
+
+#speaker{
+  position: absolute;
+  bottom: 18px;
+  right: 14px;
+  display: grid;
+  grid-template-columns: repeat(8,7px);
+  grid-template-rows: repeat(8,7px);
+  gap: 4px;
+  transform: rotate(-6deg);
+  & .hole{
+    background-color: rgb(39, 39, 39);
+    border-radius: 50%;
+  }
+  & .hole.close{
+    background-color: #cfad12;
+    border: 1px solid #998321;
+  }
+}
+
+#border-screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 55%;
+  border-radius: 40%;
+  background-color: #000;
+  border-radius: 10px;
+  margin-bottom: 16px;
+  margin-block: 10px;
+  position: relative;
+  overflow: hidden;
+  & #screen{
+    width: 70%;
+    height: 70%;
+    background-color: #69776e;
+  }
+  & img {
+    width: 80px;
+    position: absolute;
+  }
+
+  & #jigglypuff{
+    bottom: 50px;
+    right: -20px;
+  }
+
+  & #togepi{
+    bottom: -15px;
+    right: -16px;
+  }
+
+  & #pikachu{
+    bottom: -30px;
+    left: -28px;
+    width: 110px;
+    transform: rotate(15deg);
+  }
+
+  &  #pokeball{
+    top: 80px;
+    left: 0px;
+    width: 50px;
+  }
+
+  & #power-label{
+    position: absolute;
+    top: 138px;
+    color: #6d6d6d;
+    font-size: 10px;
+    left: 10px;
+  }
+}
+
+#logo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 276px;
+
+  & svg {
+    display: block;
+    width: 120px;
+    margin-top: 60px;
+    margin-left: -5px;
+  }
+
+  & #logo-nintendo {
+    border: 3px solid #ffd900;
+    border-radius: 10px;
+    width: 100px;
+    margin-top: 6px;
+  }
+}
+
+#logo-nintendo p {
+  color: #ffd900;
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  font-family: 'Tilt Neon', sans-serif;
+}
+
+#buttons-arrows {
+  display: grid;
+  grid-template-columns: 25px 26px 25px;
+  grid-template-rows: 25px 26px 25px;
+  position: absolute;
+  bottom: 140px;
+  left: 30px;
+
+  & #up {
+    grid-column: 2;
+    grid-row: 1;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+  }
+
+  & #left {
+    grid-column: 1;
+    grid-row: 2;
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+  }
+
+  & #right {
+    grid-column: 3;
+    grid-row: 2;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+  }
+
+  & #down {
+    grid-column: 2;
+    grid-row: 3;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+  }
+
+  & #null {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  & button {
+    background-color: #143697;
+    border: none;
+  }
+}
+
+#buttons-arrows button svg {
+  fill: rgb(22, 52, 136);
+}
+
+#buttons-ab {
+  position: absolute;
+  bottom: 150px;
+  right: 36px;
+  width: 100px;
+  height: 70px;
+
+  & button {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    border: none;
+    padding: 10px;
+    text-align: left;
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: -2px 2px 0 0px rgba(0, 0, 0, 0.5);
+
+  }
+
+  & #b {
+    background-color: rgb(14, 138, 14);
+    color: rgb(0, 92, 0);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
+
+  & #a {
+    background-color: rgb(173, 10, 10);
+    color: rgb(92, 0, 0);
+    position: absolute;
+    top: 5px;
+    right: 5px;
+  }
+}
+
+#buttons-start-select {
+  position: absolute;
+  bottom: 60px;
+  display: grid;
+  grid-template-columns: repeat(2, 45px);
+  grid-row: repeat(2, 15px);
+  row-gap: 4px;
+  column-gap: 12px;
+  /* Añade estas líneas para centrar horizontalmente */
+  left: 50%;
+  transform: translateX(-50%);
+
+  & #start {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  & #select {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  & button {
+    width: 40px;
+    height: 15px;
+    border-radius: 20px;
+    border: none;
+    background-color: #313131;
+    box-shadow: 0 5px 3px -2px rgba(0, 0, 0, 0.5);
+  }
+
+  & p {
+    color: #ffd900;
+    text-align: center;
+    font-size: 16px;
+    font-family: 'Tilt Neon', sans-serif;
+  }
+
+  & p#select-label {
+    margin-left: -6px;
+  }
+}
