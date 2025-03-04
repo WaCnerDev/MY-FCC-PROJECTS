@@ -22,7 +22,62 @@
         <img src="./img/pokeball.webp" alt="pokeball" id="pokeball" />
         <img src="./img/togepi.webp" alt="togepi" id="togepi" />
         <p id="power-label">POWER</p>
-        <div id="screen"></div>
+        <div id="screen">
+          <form>
+            <input
+              type="text"
+              id="search-input"
+              placeholder="Enter the name or id of the Pokemon"
+              required
+            />
+            <button id="search-button">Search</button>
+          </form>
+          <div id="info-base">
+            <p id="pokemon-name-id">
+              <spam id="pokemon-name"></spam> No. <span id="pokemon-id"></span>
+            </p>
+            <div class="row">
+              <img id="pokemon-image" src="" alt="Pokemon" />
+              <div class="col" id="height-weight">
+                <div class="item">
+                  <p class="attribute">HEIGHT</p>
+                  <p class="stats" id="height"></p>
+                </div>
+                <div class="item">
+                  <p class="attribute">WEIGHT</p>
+                  <p class="stats" id="weight"></p>
+                </div>
+              </div>
+            </div>
+            <div class="row" id="types"></div>
+          </div>
+          <div id="info-extra" class="hidden">
+            <div class="item">
+              <p class="attribute">HP</p>
+              <p class="stats" id="hp"></p>
+            </div>
+            <div class="item">
+              <p class="attribute">ATTACK</p>
+              <p class="stats" id="attack"></p>
+            </div>
+            <div class="item">
+              <p class="attribute">DEFENSE</p>
+              <p class="stats" id="defense"></p>
+            </div>
+            <div class="item">
+              <p class="attribute">SPEED</p>
+              <p class="stats" id="speed"></p>
+            </div>
+            <div class="item">
+              <p class="attribute">SPECIAL ATTACK</p>
+              <p class="stats" id="special-attack"></p>
+            </div>
+            <div class="item">
+              <p class="attribute">SPECIAL DEFENSE</p>
+              <p class="stats" id="special-defense"></p>
+            </div>
+          </div>
+        </div>
       </div>
       <div id="logo-container">
         <div id="logo-nintendo">

@@ -45,23 +45,25 @@ button:hover {
   border-radius: 10px;
   padding: 16px;
   position: relative;
-  box-shadow: 6px 6px 0px 10px #36497e;
+  box-shadow: 4px 4px 0px 6px #36497e, -4px -4px 0px 6px #36497e, 4px -4px 0px 6px #36497e, -4px 4px 0px 6px #36497e;
 }
 
-#speaker{
+#speaker {
   position: absolute;
   bottom: 18px;
   right: 14px;
   display: grid;
-  grid-template-columns: repeat(8,7px);
-  grid-template-rows: repeat(8,7px);
+  grid-template-columns: repeat(8, 7px);
+  grid-template-rows: repeat(8, 7px);
   gap: 4px;
   transform: rotate(-6deg);
-  & .hole{
+
+  & .hole {
     background-color: rgb(39, 39, 39);
     border-radius: 50%;
   }
-  & .hole.close{
+
+  & .hole.close {
     background-color: #cfad12;
     border: 1px solid #998321;
   }
@@ -80,46 +82,82 @@ button:hover {
   margin-block: 10px;
   position: relative;
   overflow: hidden;
-  & #screen{
+
+  & #screen {
     width: 70%;
     height: 70%;
     background-color: #69776e;
+    position: relative;
   }
-  & img {
+
+  >img {
     width: 80px;
     position: absolute;
   }
 
-  & #jigglypuff{
+  & #jigglypuff {
     bottom: 50px;
     right: -20px;
   }
 
-  & #togepi{
+  & #togepi {
     bottom: -15px;
     right: -16px;
   }
 
-  & #pikachu{
+  & #pikachu {
     bottom: -30px;
     left: -28px;
     width: 110px;
     transform: rotate(15deg);
   }
 
-  &  #pokeball{
+  & #pokeball {
     top: 80px;
     left: 0px;
     width: 50px;
   }
 
-  & #power-label{
+  & #power-label {
     position: absolute;
     top: 138px;
     color: #6d6d6d;
     font-size: 10px;
     left: 10px;
   }
+}
+
+#screen form {
+  border: none;
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+
+form input,
+form button {
+  height: 20px;
+}
+
+form input {
+  width: 80%;
+  border: none;
+}
+
+form button {
+  width: 20%;
+  background-color: #284081;
+  filter: saturate(0.5);
+  color: white;
+  border: none;
+}
+.row{
+  display: flex;
+}
+
+.col{
+  display: flex;
+  flex-direction: column;
 }
 
 #logo-container {
@@ -281,4 +319,65 @@ button:hover {
   & p#select-label {
     margin-left: -6px;
   }
+}
+
+#info-base {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin: 16px auto;
+}
+
+#pokemon-name-id{
+  width: 100%;
+  text-align: center;
+  font-size: 20px;
+  text-transform: capitalize;
+}
+
+#pokemon-name{
+  font-weight: bold;
+  margin-block: 6px;
+}
+
+#pokemon-image{
+  width: 160px;
+  height: auto;
+}
+
+#height-weight{
+  justify-content: space-around;
+}
+
+#info-extra {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+#types{
+  width: 140px;
+  justify-content: space-around;
+}
+
+.type-tag{
+  padding: 2px 10px;
+  text-align: center;
+  text-transform: capitalize;
+}
+
+.stats{
+  text-align: end;
+  font-weight: bold;
+}
+
+.fire{
+  background-color: #fd7d24;
+}
+
+.flying{
+  background: linear-gradient(to bottom, #87CEEB 50%, #D3D3D3 50%);
+}
+
+.hidden {
+  display: none !important;
 }
