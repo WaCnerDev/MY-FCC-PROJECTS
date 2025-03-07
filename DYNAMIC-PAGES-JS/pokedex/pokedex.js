@@ -39,15 +39,28 @@ const getPokemon = async (idOrName) => {
   }
 };
 
-const handledSumit = async (event) => {
-  event.preventDefault();
-  const inputValue = inputSearch.value;
+const handbleChangeInput = async () => {
+  const inputValue = inputSearch.value.toLowerCase().trim();
   if (inputValue === "") return;
   const pokemonResult = await getPokemon(inputValue);
-  pokemonResult ? showPokemon(pokemonResult) : alert("Pokémon not found");
+  pokemonResult ? showPokemon(pokemonResult) : displayPokemonNotFound();
 };
 
-
+const displayPokemonNotFound = () => {
+  pokemonTypes.innerHTML = "";
+  pokemonNameId.innerHTML = `<spam id="pokemon-name">Pokemon not found</spam> <span id="pokemon-id">No.0000</span>`;
+  pokemonImage.src = "./img/whoIsPokemon.webp";
+  pokemonTypes.innerHTML = "";
+  pokemonWeight.innerText = "??";
+  pokemonHeight.innerText = "??";
+  pokemonHp.innerText = "??";
+  pokemonAttack.innerText = "??";
+  pokemonDefense.innerText = "????";
+  pokemonSpecialAttack.innerText = "????";
+  pokemonSpecialDefense.innerText = "????";
+  pokemonSpeed.innerText = "??";
+  pokemonTypes.innerHTML = `<span class="unknown type-tag">UNKNOWN</span>`;
+};
 
 const showPokemon = (pokemon) => {
   const { name, id, weight, height, types, stats, sprites } = pokemon;
@@ -75,7 +88,10 @@ const showPokemon = (pokemon) => {
 
 window.onload = async () => {
   const randomId = Math.floor(Math.random() * 898);
+  inputSearch.focus();
   showPokemon(await getPokemon(randomId));
 };
 
-formSearch.addEventListener("submit", handledSumit);
+inputSearch.addEventListener("input", async () => {
+  await handbleChangeInput();
+});

@@ -84,7 +84,7 @@ button:hover {
   overflow: hidden;
 
   & #screen {
-    font-family: 'Courier New', Courier, monospace;
+    font-family: 'Silkscreen', sans-serif;
     width: 70%;
     height: 70%;
     position: relative;
@@ -141,30 +141,21 @@ button:hover {
   }
 }
 
-#screen form {
-  border: none;
-  display: flex;
+input {
   width: 100%;
-  align-items: center;
-}
-
-form input,
-form button {
   height: 20px;
+  font-size: 16px;
+  background-color: transparent;
+  margin-top: 4px;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: none;
 }
 
-form input {
-  width: 80%;
-  border: none;
+input:focus {
+  border: 2px solid blue !important;
 }
 
-form button {
-  width: 20%;
-  background-color: #284081;
-  filter: saturate(0.5);
-  color: white;
-  border: none;
-}
 
 .row {
   display: flex;
@@ -464,6 +455,10 @@ form button {
 .dark {
   background-color: #707070;
   color: rgb(199, 199, 199);
+}
+
+.unknown{
+  background-color: #68a090;
 }
 
 .hidden {
