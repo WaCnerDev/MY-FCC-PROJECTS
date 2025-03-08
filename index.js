@@ -125,7 +125,7 @@ const projects = [
     description:
       "This website allows users to check if a word or phrase is a palindrome.",
     image: "./image/preview_palindrome.webp",
-    status: "Development",
+    status: "Completed",
     link: "./DYNAMIC-PAGES-JS/palindrome-checker/palindrome-checker.html",
     category: "dynamicPagesJS",
     lastUpdate: "2024-09-14T10:10:00",
@@ -134,7 +134,7 @@ const projects = [
     title: "Number Converter",
     description: "This tool allows you to convert numbers between different number systems quickly and easily, including binary, hexadecimal, octal.",
     image: "./image/preview_num-to-roman.webp",
-    status: "Development",
+    status: "Completed",
     link: "./DYNAMIC-PAGES-JS/num-to-roman/num-to-roman.html",
     category: "dynamicPagesJS",
     lastUpdate: "2024-12-25T08:30:00",
@@ -143,7 +143,7 @@ const projects = [
     title: "Phone Number Validator",
     description: "Easily check the validity of U.S. phone numbers, no matter how they are formatted.",
     image: "./image/preview_phone-validator.webp",
-    status: "Development",
+    status: "Completed",
     link: "./DYNAMIC-PAGES-JS/phone-validator/phone-validator.html",
     category: "dynamicPagesJS",
     lastUpdate: "2025-02-01T14:50:00",
@@ -156,6 +156,16 @@ const projects = [
     link: "./DYNAMIC-PAGES-JS/cash-register/cash-register.html",
     category: "dynamicPagesJS",
     lastUpdate: "2024-10-20T11:40:00",
+  },
+  
+  {
+    title: "Pokedex from Game Boy Color",
+    description: "A pokedex that simulates the look and feel of the Game",
+    image: "./image/preview_pokedex.webp",
+    status: "Development",
+    link: "./DYNAMIC-PAGES-JS/pokedex/pokedex.html",
+    category: "dynamicPagesJS",
+    lastUpdate: "2025-03-15T16:30:00",
   },
 ];
 

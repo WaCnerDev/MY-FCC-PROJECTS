@@ -7,16 +7,28 @@
     <link rel="stylesheet" href="./num-to-roman.css" />
   </head>
   <body>
+    <img
+      id="freecodecamp-logo"
+      src="https://cdn.freecodecamp.org/platform/universal/fcc_primary.svg"
+      alt="freeCodeCamp Logo"
+    />
+    <h1>ROMAN NUMERAL CONVERTER</h1>
     <div id="main-container">
-      <img id="freecodecamp-logo" src="https://cdn.freecodecamp.org/platform/universal/fcc_primary.svg" alt="freeCodeCamp Logo">
-      <h1>ROMAN NUMERAL CONVERTER</h1>
       <form>
         <label for="text-input">Enter a Number:</label>
-        <input type="number" id="number" />
+        <div id="input-container">
+          <input type="number" id="number" />
+          <select id="type">
+            <option value="roman">To Roman</option>
+            <option value="greek">To Greek</option>
+            <option value="binary">To Binary</option>
+            <option value="hexadecimal">To Hexadecimal</option>
+            <option value="octal">To Octal</option>
+          </select>
+        </div>
         <button id="convert-btn">Convert</button>
       </form>
-      <div id="output" class="hidden">
-      </div>
+      <div id="output" class="hidden"></div>
     </div>
   </body>
   <script src="num-to-roman.js"></script>

@@ -209,7 +209,9 @@ purchase.addEventListener("click", (e) => {
   cashInput.value = "";
 });
 
-// Initial setup
-printPrice();
-generateResult();
-scrollText();
+window.addEventListener("load", () => {
+  displayCashInDrawer();
+  printPrice();
+  generateResult();
+  scrollText();
+});

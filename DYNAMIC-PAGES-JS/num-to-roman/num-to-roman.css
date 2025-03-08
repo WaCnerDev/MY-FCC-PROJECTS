@@ -11,11 +11,12 @@ body {
   height: 100vh;
   background-color: #1b1b32;
   color: white;
-  overflow: hidden;
+  overflow: auto;
   font-size: "Roboto", sans-serif;
 }
 
 h1 {
+  width: 100%;
   text-align: center;
   margin: 42px 0 21px;
   font-size: 3rem;
@@ -30,25 +31,44 @@ label {
 #main-container {
   width: 50%;
   max-width: 600px;
+  min-width: 350px;
   height: 100%;
   margin: 0 auto;
 }
 
+#input-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
 
 #freecodecamp-logo {
   width: 100%;
   height: 30px;
-  margin-top: 30px;
+  margin-top: 16px;
 }
 
+select{
+  width: 40%;
+}
 
-input, button {
+input{
+  width: 60%;
+}
+
+select, input{
+  font-size: 24px;
+  padding: 8px;
+}
+
+#input-container, button {
   width: 100%;
   font-size: 24px;
   padding: 8px;
 }
 
-input {
+input, select {
   background-color: #0a0a23;
   border: 1px solid white;
   color: white;
@@ -72,6 +92,7 @@ form {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100%;
   gap: 16px;
   background-color: rgba(255, 255, 255, 0.2);
   border: 2px solid white;
@@ -89,6 +110,8 @@ form {
   border: 2px solid white;
   text-transform: uppercase;
   padding: 28px;
+  overflow-wrap: break-word;
+  word-break: break-all;
 }
 
 
@@ -99,4 +122,25 @@ form {
 .error-msg {
   border: 2px solid rgb(252, 100, 100) !important;	
   background-color: rgba(255, 141, 141, 0.2) !important;
+}
+
+@media screen and (max-width: 1000px) {
+  html{
+    font-size: 14px;
+  }
+  #input-container {
+    flex-direction: column;
+    & *{
+      width: 100%;
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  html{
+    font-size: 12px;
+  }  
+  #main-container {
+    width: 90%;
+  }
 }
