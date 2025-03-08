@@ -94,6 +94,7 @@ button:hover {
         transparent 50%);
     /* Líneas de escaneo */
     box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
   }
 
   >img {
@@ -337,7 +338,7 @@ input:focus {
 }
 
 #pokemon-name-id {
-  display: inline-block;
+  display: flex;
   width: auto;
   align-content: center;
   white-space: nowrap;
@@ -352,6 +353,10 @@ input:focus {
 #pokemon-name {
   font-weight: bold;
   text-transform: uppercase;
+}
+
+#pokemon-name span {
+  font-weight: normal;
 }
 
 #pokemon-image {
@@ -457,7 +462,7 @@ input:focus {
   color: rgb(199, 199, 199);
 }
 
-.unknown{
+.unknown {
   background-color: #68a090;
 }
 

@@ -46,6 +46,24 @@ const handbleChangeInput = async () => {
   pokemonResult ? showPokemon(pokemonResult) : displayPokemonNotFound();
 };
 
+const scrollText = () => {
+  if (scrollInterval) {
+    clearInterval(scrollInterval); // Detener cualquier animación existente
+  }
+  let scrollPosition = 0;
+  const textWidth = pokemonNameId.offsetWidth + 16;
+  console.log(textWidth);
+  const containerWidth = pokemonNameId.parentElement.offsetWidth;
+  scrollInterval = setInterval(() => {
+    scrollPosition -= 15;
+    pokemonNameId.style.transform = `translateX(${scrollPosition}px)`;
+    if (-scrollPosition > textWidth) {
+      pokemonNameId.style.transform = `translateX(${containerWidth - 80}px)`;
+      scrollPosition = containerWidth - 80;
+    }
+  }, 200);
+};
+
 const displayPokemonNotFound = () => {
   pokemonTypes.innerHTML = "";
   pokemonNameId.innerHTML = `<spam id="pokemon-name">Pokemon not found</spam> <span id="pokemon-id">No.0000</span>`;
@@ -64,9 +82,23 @@ const displayPokemonNotFound = () => {
 
 const showPokemon = (pokemon) => {
   const { name, id, weight, height, types, stats, sprites } = pokemon;
-  pokemonNameId.innerHTML = `<spam id="pokemon-name">${name}</spam> <span id="pokemon-id">No.${id
-    .toString()
-    .padStart(4, "0")}</span>`;
+  if (name.length > 10) {
+    pokemonNameId.innerHTML = "";
+    for (let i = 0; i < 3; i++) {
+      pokemonNameId.innerHTML += `<spam id="pokemon-name">${
+        name + "  "
+      } <span id="pokemon-id">No.${id.toString().padStart(4, "0")}</span>
+        </spam> `;
+    }
+    pokemonNameId.style.gap = "60px";
+    scrollText();
+  } else {
+    clearInterval(scrollInterval);
+    pokemonNameId.innerHTML = `<spam id="pokemon-name">${name}</spam> <span id="pokemon-id">No.${id
+      .toString()
+      .padStart(4, "0")}</span>`;
+    pokemonNameId.style.gap = "10px";
+  }
   pokemonImage.src = sprites.front_default;
   pokemonWeight.innerText = weight;
   pokemonHeight.innerText = height;
@@ -86,12 +118,12 @@ const showPokemon = (pokemon) => {
     .join(" ");
 };
 
+inputSearch.addEventListener("input", async () => {
+  await handbleChangeInput();
+});
+
 window.onload = async () => {
   const randomId = Math.floor(Math.random() * 898);
   inputSearch.focus();
   showPokemon(await getPokemon(randomId));
 };
-
-inputSearch.addEventListener("input", async () => {
-  await handbleChangeInput();
-});
