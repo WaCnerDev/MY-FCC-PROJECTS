@@ -157,6 +157,16 @@ const projects = [
     category: "dynamicPagesJS",
     lastUpdate: "2024-10-20T11:40:00",
   },
+  
+  {
+    title: "Pokedex from Game Boy Color",
+    description: "A pokedex that simulates the look and feel of the Game",
+    image: "./image/preview_pokedex.webp",
+    status: "Development",
+    link: "./DYNAMIC-PAGES-JS/pokedex/pokedex.html",
+    category: "dynamicPagesJS",
+    lastUpdate: "2025-03-15T16:30:00",
+  },
 ];
 
 projects.forEach((project) => {
