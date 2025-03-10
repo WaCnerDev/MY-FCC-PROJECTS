@@ -80,7 +80,7 @@ function renderCards(title, description, status, image, link, lastUpdate) {
     <div class="info-container"> 
       <h3><b>${title}</b></h3>
       <p class="project-description">${truncateDescription(description)}</p>
-      <div class="row">
+      <div class="status-container">
         <div class="field">
           <p class="bold-label">Status:</p>  
           <p class="value"><span class="visual-status ${fromStatusToColor(
