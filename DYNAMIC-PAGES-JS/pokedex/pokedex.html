@@ -34,9 +34,8 @@
             placeholder="ENTER POKEMON NAME/ID"
             required
           />
-          <div id="info-base">
-            <p id="pokemon-name-id">
-            </p>
+          <div id="info-base" class="hidden">
+            <p id="pokemon-name-id"></p>
             <div class="row">
               <img id="pokemon-image" src="" alt="Pokemon" />
               <div class="col" id="height-weight">
@@ -52,30 +51,55 @@
             </div>
             <div class="row" id="types"></div>
           </div>
-          <div id="info-extra" class="hidden">
-            <div class="item">
-              <p class="attribute">HP</p>
-              <p class="stats" id="hp"></p>
+          <div id="info-extra">
+            <div class="pag1">
+              <div class="stat-name">HP</div>
+              <div class="stat-bar">
+                <div class="bar-container row">
+                  <div class="bar" id="hp-bar"></div>
+                  <div id="hp" class="stat-value"></div>
+                </div>
+              </div>
+              <div class="stat-name">ATTACK</div>
+              <div class="stat-bar">
+                <div class="bar-container row">
+                  <div class="bar" id="attack-bar"></div>
+                  <div id="attack" class="stat-value"></div>
+                </div>
+              </div>
+
+              <div class="stat-name">SPEED</div>
+              <div class="stat-bar">
+                <div class="bar-container row">
+                  <div class="bar" id="speed-bar"></div>
+                  <div id="speed" class="stat-value"></div>
+                </div>
+              </div>
             </div>
-            <div class="item">
-              <p class="attribute">ATTACK</p>
-              <p class="stats" id="attack"></p>
-            </div>
-            <div class="item">
-              <p class="attribute">DEFENSE</p>
-              <p class="stats" id="defense"></p>
-            </div>
-            <div class="item">
-              <p class="attribute">SPEED</p>
-              <p class="stats" id="speed"></p>
-            </div>
-            <div class="item">
-              <p class="attribute">SPECIAL ATTACK</p>
-              <p class="stats" id="special-attack"></p>
-            </div>
-            <div class="item">
-              <p class="attribute">SPECIAL DEFENSE</p>
-              <p class="stats" id="special-defense"></p>
+            <div class="pag2 hidden">
+              <div class="stat-name">DEFENSE</div>
+              <div class="stat-bar">
+                <div class="bar-container row">
+                  <div class="bar" id="defense-bar"></div>
+                  <div id="defense" class="stat-value"></div>
+                </div>
+              </div>
+
+              <div class="stat-name">SPECIAL-ATTACK</div>
+              <div class="stat-bar">
+                <div class="bar-container row">
+                  <div class="bar" id="special-attack-bar"></div>
+                  <div id="special-attack" class="stat-value"></div>
+                </div>
+              </div>
+
+              <div class="stat-name">SPECIAL-DEFENSE</div>
+              <div class="stat-bar">
+                <div class="bar-container row">
+                  <div class="bar" id="special-defense-bar"></div>
+                  <div id="special-defense" class="stat-value"></div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
