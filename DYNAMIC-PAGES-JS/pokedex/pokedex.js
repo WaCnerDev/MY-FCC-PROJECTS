@@ -15,6 +15,15 @@ const formSearch = document.getElementById("search-form");
 const inputSearch = document.getElementById("search-input");
 let scrollInterval;
 
+const maxStats = {
+  hp: 255, // Valor máximo común para HP
+  attack: 190, // Valor máximo común para Ataque
+  defense: 230, // Valor máximo común para Defensa
+  "special-attack": 194, // Valor máximo común para Ataque Especial
+  "special-defense": 230, // Valor máximo común para Defensa Especial
+  speed: 180, // Valor máximo común para Velocidad
+};
+
 const listPokemons = async () => {
   try {
     const response = await fetch(
@@ -66,7 +75,12 @@ const scrollText = () => {
 
 const displayPokemonNotFound = () => {
   pokemonTypes.innerHTML = "";
-  pokemonNameId.innerHTML = `<spam id="pokemon-name">Pokemon not found</spam> <span id="pokemon-id">No.0000</span>`;
+  pokemonNameId.innerHTML = "";
+  for (let i = 0; i < 3; i++) {
+    pokemonNameId.innerHTML += `<spam id="pokemon-name">POKEMON NOT FOUND <span id="pokemon-id">No.0000</span>
+    </spam> `;
+  }
+  pokemonNameId.style.gap = "60px";
   pokemonImage.src = "./img/whoIsPokemon.webp";
   pokemonTypes.innerHTML = "";
   pokemonWeight.innerText = "??";
@@ -78,6 +92,18 @@ const displayPokemonNotFound = () => {
   pokemonSpecialDefense.innerText = "????";
   pokemonSpeed.innerText = "??";
   pokemonTypes.innerHTML = `<span class="unknown type-tag">UNKNOWN</span>`;
+  scrollText();
+};
+
+const fillPorcentBar = (stats) => {
+  for (const stat of stats) {
+    const bar = document.getElementById(`${stat.stat.name}-bar`);
+    const value = stat.base_stat;
+    const maxValue = maxStats[stat.stat.name];
+    const percentage = ((value / maxValue) * 100).toFixed(2);
+    console.log(stat.stat.name, percentage);
+    bar.style.width = `${percentage}%`;
+  }
 };
 
 const showPokemon = (pokemon) => {
@@ -108,6 +134,7 @@ const showPokemon = (pokemon) => {
   pokemonSpecialAttack.innerText = stats[3].base_stat;
   pokemonSpecialDefense.innerText = stats[4].base_stat;
   pokemonSpeed.innerText = stats[5].base_stat;
+  fillPorcentBar(stats);
   pokemonTypes.innerHTML = "";
   pokemonTypes.style.width = types.length === 1 ? "140px" : "auto";
   pokemonTypes.innerHTML += types

@@ -16,28 +16,52 @@ function fromStatusToColor(status) {
 function formatDate(date) {
   const pastDate = new Date(date);
   const currentDate = new Date();
-
+  const amountDaysInMonth = new Date(
+    currentDate.getFullYear(),
+    currentDate.getMonth() + 1,
+    0
+  ).getDate();
   const diffInMilliseconds = currentDate.getTime() - pastDate.getTime();
   const diffInSeconds = Math.floor(diffInMilliseconds / 1000);
   const diffInMinutes = Math.floor(diffInSeconds / 60);
   const diffInHours = Math.floor(diffInMinutes / 60);
   const diffInDays = Math.floor(diffInHours / 24);
-  const diffInMonths = Math.floor(diffInDays / 30);
+  const diffInMonths = Math.floor(diffInDays / amountDaysInMonth);
   const diffInYears = Math.floor(diffInDays / 365);
 
+  let timeAgo = "";
+  let typeDiff = "";
   if (diffInYears > 0) {
-    return `${diffInYears} year${diffInYears > 1 ? "s" : ""} ago`;
+    timeAgo = `${diffInYears} year${diffInYears > 1 ? "s" : ""} ago`;
+    typeDiff = "year";
   } else if (diffInMonths > 0) {
-    return `${diffInMonths} month${diffInMonths > 1 ? "s" : ""} ago`;
+    timeAgo = `${diffInMonths} month${diffInMonths > 1 ? "s" : ""} ago`;
+    typeDiff = "month";
   } else if (diffInDays > 0) {
-    return `${diffInDays} day${diffInDays > 1 ? "s" : ""} ago`;
+    timeAgo = `${diffInDays} day${diffInDays > 1 ? "s" : ""} ago`;
+    typeDiff = "day";
   } else if (diffInHours > 0) {
-    return `${diffInHours} hour${diffInHours > 1 ? "s" : ""} ago`;
+    timeAgo = `${diffInHours} hour${diffInHours > 1 ? "s" : ""} ago`;
+    typeDiff = "hour";
   } else if (diffInMinutes > 0) {
-    return `${diffInMinutes} minute${diffInMinutes > 1 ? "s" : ""} ago`;
+    timeAgo = `${diffInMinutes} minute${diffInMinutes > 1 ? "s" : ""} ago`;
+    typeDiff = "minute";
   } else {
-    return "a few seconds ago";
+    timeAgo = `${diffInSeconds} second${diffInSeconds > 1 ? "s" : ""} ago`;
+    typeDiff= "second";
   }
+
+  return `<p class="value ${typeDiff}" data-last-update="${date}">${timeAgo}</p>`;
+}
+
+function updateLastUpdate() {
+  const lastUpdateElements = document.querySelectorAll(
+    ".second, .minute, .hour"
+  );
+  lastUpdateElements.forEach((element) => {
+    const lastUpdate = element.getAttribute("data-last-update");
+    element.innerHTML = formatDate(lastUpdate);
+  });
 }
 
 function truncateDescription(description) {
@@ -56,14 +80,16 @@ function renderCards(title, description, status, image, link, lastUpdate) {
     <div class="info-container"> 
       <h3><b>${title}</b></h3>
       <p class="project-description">${truncateDescription(description)}</p>
-      <div class="row">
+      <div class="status-container">
         <div class="field">
           <p class="bold-label">Status:</p>  
-          <p class="value"><span class="visual-status ${fromStatusToColor(status)}"></span>${status}</p>
+          <p class="value"><span class="visual-status ${fromStatusToColor(
+            status
+          )}"></span>${status}</p>
         </div>
         <div class="field">
           <p class="bold-label">Last Update:</p>
-          <p class="value">${formatDate(lastUpdate)}</p>
+          ${formatDate(lastUpdate)}
         </div>
       </div>  
     </div>
@@ -77,7 +103,8 @@ function renderCards(title, description, status, image, link, lastUpdate) {
 const projects = [
   {
     title: "Survey Form",
-    description: "A user-friendly form to collect information about your gaming preferences, designed with accessibility and responsiveness in mind.",
+    description:
+      "A user-friendly form to collect information about your gaming preferences, designed with accessibility and responsiveness in mind.",
     image: "./image/preview_form.webp",
     status: "Completed",
     link: "./WEB-RESPONSIVE/survey-form/survey-form.html",
@@ -86,16 +113,18 @@ const projects = [
   },
   {
     title: "Technical Documentation",
-    description: "JavaScript documentation website featuring sections, a navigation menu, and a responsive layout.",
+    description:
+      "JavaScript documentation website featuring sections, a navigation menu, and a responsive layout.",
     image: "./image/preview_technical_doc.webp",
     status: "Completed",
     link: "./WEB-RESPONSIVE/tecnical-doc/tecnical-doc.html",
     category: "responsiveWebDesing",
-    lastUpdate: "2024-08-22T09:15:00",
+    lastUpdate: "2024-02-22T09:15:00",
   },
   {
     title: "Landing Page Trombones",
-    description: "Landing page for trombone sales with video, product section, and intuitive navigation.",
+    description:
+      "Landing page for trombone sales with video, product section, and intuitive navigation.",
     image: "./image/preview_store_trombones.webp",
     status: "Completed",
     link: "./WEB-RESPONSIVE/trombones-store/trombones-store.html",
@@ -104,7 +133,8 @@ const projects = [
   },
   {
     title: "Tribute Page",
-    description: "A tribute page dedicated to Nikola Tesla, highlighting his life, achievements, and legacy.",
+    description:
+      "A tribute page dedicated to Nikola Tesla, highlighting his life, achievements, and legacy.",
     image: "./image/preview_tribute_page.webp",
     status: "Completed",
     link: "./WEB-RESPONSIVE/tribute-pages/tribute-pages.html",
@@ -113,7 +143,8 @@ const projects = [
   },
   {
     title: "Personal Portfolio",
-    description: "A portfolio of web development projects, showcasing skills, technologies, and the various projects I have developed.",
+    description:
+      "A portfolio of web development projects, showcasing skills, technologies, and the various projects I have developed.",
     image: "./image/preview_personal_portfolio.webp",
     status: "Development",
     link: "./WEB-RESPONSIVE/personal-portafolio/personal-portafolio.html",
@@ -132,7 +163,8 @@ const projects = [
   },
   {
     title: "Number Converter",
-    description: "This tool allows you to convert numbers between different number systems quickly and easily, including binary, hexadecimal, octal.",
+    description:
+      "This tool allows you to convert numbers between different number systems quickly and easily, including binary, hexadecimal, octal.",
     image: "./image/preview_num-to-roman.webp",
     status: "Completed",
     link: "./DYNAMIC-PAGES-JS/num-to-roman/num-to-roman.html",
@@ -141,7 +173,8 @@ const projects = [
   },
   {
     title: "Phone Number Validator",
-    description: "Easily check the validity of U.S. phone numbers, no matter how they are formatted.",
+    description:
+      "Easily check the validity of U.S. phone numbers, no matter how they are formatted.",
     image: "./image/preview_phone-validator.webp",
     status: "Completed",
     link: "./DYNAMIC-PAGES-JS/phone-validator/phone-validator.html",
@@ -150,22 +183,23 @@ const projects = [
   },
   {
     title: "Cash Register",
-    description: "This cash register app calculates change, displays the remaining cash in the drawer, and handles various transaction scenarios.",
+    description:
+      "This cash register app calculates change, displays the remaining cash in the drawer, and handles various transaction scenarios.",
     image: "./image/preview_cash-register.webp",
     status: "Completed",
     link: "./DYNAMIC-PAGES-JS/cash-register/cash-register.html",
     category: "dynamicPagesJS",
-    lastUpdate: "2024-10-20T11:40:00",
+    lastUpdate: "2025-03-08T11:58:00",
   },
-  
   {
-    title: "Pokedex from Game Boy Color",
-    description: "A pokedex that simulates the look and feel of the Game",
+    title: "Pokedex from Game Boy",
+    description:
+      "A Pokedex that simulates the look and feel of a Game Boy. The buttons are functional, and you can search for Pokemon by ID or name.",
     image: "./image/preview_pokedex.webp",
     status: "Development",
     link: "./DYNAMIC-PAGES-JS/pokedex/pokedex.html",
     category: "dynamicPagesJS",
-    lastUpdate: "2025-03-15T16:30:00",
+    lastUpdate: "2025-03-08T11:58:00",
   },
 ];
 
@@ -184,3 +218,6 @@ projects.forEach((project) => {
     dynamicPagesJS.appendChild(card);
   }
 });
+
+// Actualizar los valores cada segundo
+setInterval(updateLastUpdate, 1000);
