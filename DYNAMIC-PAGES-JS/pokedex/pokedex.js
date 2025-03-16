@@ -13,7 +13,20 @@ const pokemonSpecialAttack = document.getElementById("special-attack");
 const pokemonSpecialDefense = document.getElementById("special-defense");
 const formSearch = document.getElementById("search-form");
 const inputSearch = document.getElementById("search-input");
+const navigateLeft = document.getElementById("navigate-left");
+const navigateRight = document.getElementById("navigate-right");
+const navigateDown = document.getElementById("navigate-down");
+const navigateUp = document.getElementById("navigate-up");
+const btnUp = document.getElementById("up");
+const btnDown = document.getElementById("down");
+const btnLeft = document.getElementById("left");
+const btnRight = document.getElementById("right");
+const infoBase = document.getElementById("info-base");
+const infoExtra = document.getElementById("info-extra");
+const infoExtra1 = document.getElementById("pag1");
+const infoExtra2 = document.getElementById("pag2");
 let scrollInterval;
+let stage = 0;
 
 const maxStats = {
   hp: 255, // Valor máximo común para HP
@@ -48,6 +61,36 @@ const getPokemon = async (idOrName) => {
   }
 };
 
+const stageController = () => {
+  switch (stage) {
+    case 0:
+      infoBase.style.display = "flex";
+      infoExtra.style.display = "none";
+      navigateRight.style.display = "block";
+      navigateLeft.style.display = "block";
+      navigateDown.style.display = "block";
+      navigateUp.style.display = "none";
+      break;
+    case 1:
+      navigateRight.style.display = "none";
+      navigateLeft.style.display = "none";
+      navigateUp.style.display = "block";
+      navigateDown.style.display = "block";
+      infoBase.style.display = "none";
+      infoExtra.style.display = "flex";
+      infoExtra1.style.display = "block";
+      infoExtra2.style.display = "none";
+      break;
+    case 2:
+      infoExtra1.style.display = "none";
+      infoExtra2.style.display = "block";
+      break;
+    default:
+      console.error("Invalid stage:", stage);
+      break;
+  }
+};
+
 const handbleChangeInput = async () => {
   const inputValue = inputSearch.value.toLowerCase().trim();
   if (inputValue === "") return;
@@ -61,7 +104,6 @@ const scrollText = () => {
   }
   let scrollPosition = 0;
   const textWidth = pokemonNameId.offsetWidth + 16;
-  console.log(textWidth);
   const containerWidth = pokemonNameId.parentElement.offsetWidth;
   scrollInterval = setInterval(() => {
     scrollPosition -= 15;
@@ -101,14 +143,13 @@ const fillPorcentBar = (stats) => {
     const value = stat.base_stat;
     const maxValue = maxStats[stat.stat.name];
     const percentage = ((value / maxValue) * 100).toFixed(2);
-    console.log(stat.stat.name, percentage);
     bar.style.width = `${percentage}%`;
   }
 };
 
 const showPokemon = (pokemon) => {
   const { name, id, weight, height, types, stats, sprites } = pokemon;
-  if (name.length > 10) {
+  if (name.length > 8) {
     pokemonNameId.innerHTML = "";
     for (let i = 0; i < 3; i++) {
       pokemonNameId.innerHTML += `<spam id="pokemon-name">${
@@ -149,8 +190,18 @@ inputSearch.addEventListener("input", async () => {
   await handbleChangeInput();
 });
 
+btnUp.addEventListener("click", () => {
+  stage = stage > 0 ? stage - 1 : stage;
+  stageController(stage);
+});
+
+btnDown.addEventListener("click", () => {
+  stage = stage < 2 ? stage + 1 : stage;
+  stageController(stage);
+});
+
 window.onload = async () => {
   const randomId = Math.floor(Math.random() * 898);
-  inputSearch.focus();
   showPokemon(await getPokemon(randomId));
+  stageController(0);
 };
