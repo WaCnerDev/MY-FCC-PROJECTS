@@ -84,6 +84,8 @@ button:hover {
   overflow: hidden;
 
   & #screen {
+    display: flex;
+    flex-direction: column;
     font-family: 'Silkscreen', sans-serif;
     width: 70%;
     height: 70%;
@@ -92,7 +94,6 @@ button:hover {
     background-image: linear-gradient(to bottom,
         rgba(0, 0, 0, 0.1) 0%,
         transparent 50%);
-    /* Líneas de escaneo */
     box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
     overflow: hidden;
   }
@@ -140,6 +141,63 @@ button:hover {
     transform: translateX(-50%);
     width: 220px;
   }
+}
+
+#main-content {
+  width: 80%;
+  height: auto;
+}
+
+#navigate-left, #navigate-right{
+  height: 180px;
+  width: 10%;
+}
+
+#navigate-up, #navigate-down{
+  width: 80%;
+  height: 10%;
+  margin: 0 auto;
+}
+
+.btn-navigate span{
+  color: white;
+  opacity: 0.7;
+  font-weight: bold;
+}
+
+.blink-element{
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 100% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 0.2;
+  }
+}
+
+#navigate-up span, #navigate-down span{
+  font-size: 12px;
+}
+
+#navigate-up span{
+  transform: rotate(-90deg);
+}
+
+#navigate-down span{
+  transform: rotate(90deg);
+}
+
+#navigate-left span{
+  transform: rotate(180deg);
+}
+
+.btn-navigate {
+  background-color: #6d6d6d;
+  opacity: 0.7;
+  border: none;
 }
 
 input {
@@ -331,10 +389,14 @@ input:focus {
 #info-base {
   display: flex;
   flex-direction: column;
-  width: 80%;
-  margin: 0px auto;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
   position: relative;
-  margin-top: 30px;
+}
+
+#info-base > div:first-of-type {
+  margin-top: 12px;
 }
 
 #pokemon-name-id {
@@ -345,7 +407,7 @@ input:focus {
   font-size: 16px;
   text-transform: uppercase;
   position: absolute;
-  top: -16px;
+  top: 0px;
   left: 50%;
   transform: translateX(-50%);
 }
@@ -368,23 +430,16 @@ input:focus {
   justify-content: space-around;
 }
 
-#info-extra{
-  display: flex;
+#info-extra {
+  display: inline-block;
   flex-direction: column;
-  width: 80%;
-  height: 180px;
-  margin: 0px auto;
-  margin-top: 16px;
-  overflow: hidden;
-}
-
-.pag1, .pag2{
   width: 100%;
-  height: 100%;
+  margin-inline: 25.75px;
 }
 
-#types {
+#types{
   justify-content: space-around;
+  padding-block:6px;
 }
 
 .type-tag {
@@ -399,17 +454,17 @@ input:focus {
   font-weight: bold;
 }
 
-.stat-value{
+.stat-value {
   font-weight: bold;
   margin-left: 4px;
 }
 
-.bar-container{
+.bar-container {
   width: 100%;
   position: relative;
 }
 
-.stat-bar{
+.stat-bar {
   display: flex;
   margin-block: 6px;
 }

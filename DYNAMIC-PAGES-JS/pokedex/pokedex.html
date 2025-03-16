@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Pokedex</title>
     <link rel="stylesheet" href="pokedex.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=arrow_forward_ios"
+    />
   </head>
   <body>
     <header>
@@ -34,74 +38,90 @@
             placeholder="ENTER POKEMON NAME/ID"
             required
           />
-          <div id="info-base" class="hidden">
-            <p id="pokemon-name-id"></p>
-            <div class="row">
-              <img id="pokemon-image" src="" alt="Pokemon" />
-              <div class="col" id="height-weight">
-                <div class="item">
-                  <p class="attribute">HEIGHT</p>
-                  <p class="stats" id="height"></p>
+          <button class="btn-navigate blink-element" id="navigate-up"><span class="material-symbols-outlined">
+            arrow_forward_ios
+            </span></button>
+          <div class="row">
+            <button class="btn-navigate blink-element" id="navigate-left">
+              <span class="material-symbols-outlined"> arrow_forward_ios </span>
+            </button>
+            <div id="main-content">
+              <div id="info-base">
+                <p id="pokemon-name-id"></p>
+                <div class="row">
+                  <img id="pokemon-image" src="" alt="Pokemon" />
+                  <div class="col" id="height-weight">
+                    <div class="item">
+                      <p class="attribute">HEIGHT</p>
+                      <p class="stats" id="height"></p>
+                    </div>
+                    <div class="item">
+                      <p class="attribute">WEIGHT</p>
+                      <p class="stats" id="weight"></p>
+                    </div>
+                  </div>
                 </div>
-                <div class="item">
-                  <p class="attribute">WEIGHT</p>
-                  <p class="stats" id="weight"></p>
+                <div class="row" id="types"></div>
+              </div>
+              <div id="info-extra">
+                <div id="pag1">
+                  <div class="stat-name">HP</div>
+                  <div class="stat-bar">
+                    <div class="bar-container row">
+                      <div class="bar" id="hp-bar"></div>
+                      <div id="hp" class="stat-value"></div>
+                    </div>
+                  </div>
+                  <div class="stat-name">ATTACK</div>
+                  <div class="stat-bar">
+                    <div class="bar-container row">
+                      <div class="bar" id="attack-bar"></div>
+                      <div id="attack" class="stat-value"></div>
+                    </div>
+                  </div>
+
+                  <div class="stat-name">SPEED</div>
+                  <div class="stat-bar">
+                    <div class="bar-container row">
+                      <div class="bar" id="speed-bar"></div>
+                      <div id="speed" class="stat-value"></div>
+                    </div>
+                  </div>
+                </div>
+                <div id="pag2">
+                  <div class="stat-name">DEFENSE</div>
+                  <div class="stat-bar">
+                    <div class="bar-container row">
+                      <div class="bar" id="defense-bar"></div>
+                      <div id="defense" class="stat-value"></div>
+                    </div>
+                  </div>
+
+                  <div class="stat-name">SPECIAL-ATTACK</div>
+                  <div class="stat-bar">
+                    <div class="bar-container row">
+                      <div class="bar" id="special-attack-bar"></div>
+                      <div id="special-attack" class="stat-value"></div>
+                    </div>
+                  </div>
+
+                  <div class="stat-name">SPECIAL-DEFENSE</div>
+                  <div class="stat-bar">
+                    <div class="bar-container row">
+                      <div class="bar" id="special-defense-bar"></div>
+                      <div id="special-defense" class="stat-value"></div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="row" id="types"></div>
+            <button class="btn-navigate blink-element" id="navigate-right">
+              <span class="material-symbols-outlined"> arrow_forward_ios </span>
+            </button>
           </div>
-          <div id="info-extra">
-            <div class="pag1">
-              <div class="stat-name">HP</div>
-              <div class="stat-bar">
-                <div class="bar-container row">
-                  <div class="bar" id="hp-bar"></div>
-                  <div id="hp" class="stat-value"></div>
-                </div>
-              </div>
-              <div class="stat-name">ATTACK</div>
-              <div class="stat-bar">
-                <div class="bar-container row">
-                  <div class="bar" id="attack-bar"></div>
-                  <div id="attack" class="stat-value"></div>
-                </div>
-              </div>
-
-              <div class="stat-name">SPEED</div>
-              <div class="stat-bar">
-                <div class="bar-container row">
-                  <div class="bar" id="speed-bar"></div>
-                  <div id="speed" class="stat-value"></div>
-                </div>
-              </div>
-            </div>
-            <div class="pag2 hidden">
-              <div class="stat-name">DEFENSE</div>
-              <div class="stat-bar">
-                <div class="bar-container row">
-                  <div class="bar" id="defense-bar"></div>
-                  <div id="defense" class="stat-value"></div>
-                </div>
-              </div>
-
-              <div class="stat-name">SPECIAL-ATTACK</div>
-              <div class="stat-bar">
-                <div class="bar-container row">
-                  <div class="bar" id="special-attack-bar"></div>
-                  <div id="special-attack" class="stat-value"></div>
-                </div>
-              </div>
-
-              <div class="stat-name">SPECIAL-DEFENSE</div>
-              <div class="stat-bar">
-                <div class="bar-container row">
-                  <div class="bar" id="special-defense-bar"></div>
-                  <div id="special-defense" class="stat-value"></div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <button class="btn-navigate blink-element" id="navigate-down">
+            <span class="material-symbols-outlined"> arrow_forward_ios </span>
+          </button>
         </div>
       </div>
       <div id="logo-container">
