@@ -25,7 +25,10 @@ const infoBase = document.getElementById("info-base");
 const infoExtra = document.getElementById("info-extra");
 const infoExtra1 = document.getElementById("pag1");
 const infoExtra2 = document.getElementById("pag2");
-let idPokemon = Math.floor(Math.random() * 898);
+let idPokemon = localStorage.getItem("idPokemon")
+  ? parseInt(localStorage.getItem("idPokemon"))
+  : Math.floor(Math.random() * 898);
+const originalStylesPokemonNameId = pokemonNameId.style.cssText;
 let scrollInterval;
 let stage = 0;
 
@@ -83,14 +86,12 @@ const handbleChangeInput = async () => {
   const inputValue = inputSearch.value.toLowerCase().trim();
   if (inputValue === "") return;
   const pokemonResult = await getPokemon(inputValue);
-  pokemonResult ? idPokemon= pokemonResult.id : idPokemon = 0;
+  pokemonResult ? (idPokemon = pokemonResult.id) : (idPokemon = 0);
+  localStorage.setItem("idPokemon", idPokemon);
   showPokemon(pokemonResult);
 };
 
 const scrollText = () => {
-  if (scrollInterval) {
-    clearInterval(scrollInterval); // Detener cualquier animación existente
-  }
   let scrollPosition = 0;
   const textWidth = pokemonNameId.offsetWidth + 16;
   const containerWidth = pokemonNameId.parentElement.offsetWidth;
@@ -104,11 +105,14 @@ const scrollText = () => {
   }, 200);
 };
 
-const showPokemon = (pokemon=null) => {
+const showPokemon = (pokemon = null) => {
+  if (scrollInterval) clearInterval(scrollInterval);
+  pokemonNameId.style.cssText = originalStylesPokemonNameId;
   if (!pokemon) {
     displayPokemonNotFound();
     return;
   }
+
   const { name, id, weight, height, types, stats, sprites } = pokemon;
   if (name.length > 8) {
     pokemonNameId.innerHTML = "";
@@ -121,7 +125,6 @@ const showPokemon = (pokemon=null) => {
     pokemonNameId.style.gap = "60px";
     scrollText();
   } else {
-    clearInterval(scrollInterval);
     pokemonNameId.innerHTML = `<spam id="pokemon-name">${name}</spam> <span id="pokemon-id">No.${id
       .toString()
       .padStart(4, "0")}</span>`;
@@ -194,11 +197,13 @@ btnDown.addEventListener("click", () => {
 
 btnLeft.addEventListener("click", async () => {
   idPokemon = idPokemon > 1 ? idPokemon - 1 : idPokemon;
+  localStorage.setItem("idPokemon", idPokemon);
   showPokemon(await getPokemon(idPokemon));
 });
 
 btnRight.addEventListener("click", async () => {
   idPokemon = idPokemon < 898 ? idPokemon + 1 : idPokemon;
+  localStorage.setItem("idPokemon", idPokemon);
   showPokemon(await getPokemon(idPokemon));
 });
 
