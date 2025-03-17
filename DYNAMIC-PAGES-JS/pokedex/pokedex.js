@@ -25,6 +25,10 @@ const infoBase = document.getElementById("info-base");
 const infoExtra = document.getElementById("info-extra");
 const infoExtra1 = document.getElementById("pag1");
 const infoExtra2 = document.getElementById("pag2");
+let idPokemon = localStorage.getItem("idPokemon")
+  ? parseInt(localStorage.getItem("idPokemon"))
+  : Math.floor(Math.random() * 898);
+const originalStylesPokemonNameId = pokemonNameId.style.cssText;
 let scrollInterval;
 let stage = 0;
 
@@ -37,25 +41,12 @@ const maxStats = {
   speed: 180, // Valor máximo común para Velocidad
 };
 
-const listPokemons = async () => {
-  try {
-    const response = await fetch(
-      "https://pokeapi-proxy.freecodecamp.rocks/api/pokemon"
-    );
-    const pokemons = await response.json();
-    return pokemons;
-  } catch (error) {
-    console.error(error);
-  }
-};
-
 const getPokemon = async (idOrName) => {
   try {
     const response = await fetch(
       `https://pokeapi-proxy.freecodecamp.rocks/api/pokemon/${idOrName}`
     );
-    const pokemon = await response.json();
-    return pokemon;
+    return await response.json();
   } catch (error) {
     console.error(error);
   }
@@ -64,6 +55,18 @@ const getPokemon = async (idOrName) => {
 const stageController = () => {
   switch (stage) {
     case 0:
+      inputSearch.disabled = false;
+      inputSearch.focus();
+      infoBase.style.display = "flex";
+      infoExtra.style.display = "none";
+      navigateRight.style.display = "none";
+      navigateLeft.style.display = "none";
+      navigateDown.style.display = "block";
+      navigateUp.style.display = "none";
+      break;
+    case 1:
+      inputSearch.disabled = true;
+      inputSearch.blur();
       infoBase.style.display = "flex";
       infoExtra.style.display = "none";
       navigateRight.style.display = "block";
@@ -71,7 +74,7 @@ const stageController = () => {
       navigateDown.style.display = "block";
       navigateUp.style.display = "none";
       break;
-    case 1:
+    case 2:
       navigateRight.style.display = "none";
       navigateLeft.style.display = "none";
       navigateUp.style.display = "block";
@@ -81,7 +84,7 @@ const stageController = () => {
       infoExtra1.style.display = "block";
       infoExtra2.style.display = "none";
       break;
-    case 2:
+    case 3:
       infoExtra1.style.display = "none";
       infoExtra2.style.display = "block";
       break;
@@ -95,13 +98,12 @@ const handbleChangeInput = async () => {
   const inputValue = inputSearch.value.toLowerCase().trim();
   if (inputValue === "") return;
   const pokemonResult = await getPokemon(inputValue);
-  pokemonResult ? showPokemon(pokemonResult) : displayPokemonNotFound();
+  pokemonResult ? (idPokemon = pokemonResult.id) : (idPokemon = 0);
+  localStorage.setItem("idPokemon", idPokemon);
+  showPokemon(pokemonResult);
 };
 
 const scrollText = () => {
-  if (scrollInterval) {
-    clearInterval(scrollInterval); // Detener cualquier animación existente
-  }
   let scrollPosition = 0;
   const textWidth = pokemonNameId.offsetWidth + 16;
   const containerWidth = pokemonNameId.parentElement.offsetWidth;
@@ -115,39 +117,14 @@ const scrollText = () => {
   }, 200);
 };
 
-const displayPokemonNotFound = () => {
-  pokemonTypes.innerHTML = "";
-  pokemonNameId.innerHTML = "";
-  for (let i = 0; i < 3; i++) {
-    pokemonNameId.innerHTML += `<spam id="pokemon-name">POKEMON NOT FOUND <span id="pokemon-id">No.0000</span>
-    </spam> `;
+const showPokemon = (pokemon = null) => {
+  if (scrollInterval) clearInterval(scrollInterval);
+  pokemonNameId.style.cssText = originalStylesPokemonNameId;
+  if (!pokemon) {
+    displayPokemonNotFound();
+    return;
   }
-  pokemonNameId.style.gap = "60px";
-  pokemonImage.src = "./img/whoIsPokemon.webp";
-  pokemonTypes.innerHTML = "";
-  pokemonWeight.innerText = "??";
-  pokemonHeight.innerText = "??";
-  pokemonHp.innerText = "??";
-  pokemonAttack.innerText = "??";
-  pokemonDefense.innerText = "????";
-  pokemonSpecialAttack.innerText = "????";
-  pokemonSpecialDefense.innerText = "????";
-  pokemonSpeed.innerText = "??";
-  pokemonTypes.innerHTML = `<span class="unknown type-tag">UNKNOWN</span>`;
-  scrollText();
-};
 
-const fillPorcentBar = (stats) => {
-  for (const stat of stats) {
-    const bar = document.getElementById(`${stat.stat.name}-bar`);
-    const value = stat.base_stat;
-    const maxValue = maxStats[stat.stat.name];
-    const percentage = ((value / maxValue) * 100).toFixed(2);
-    bar.style.width = `${percentage}%`;
-  }
-};
-
-const showPokemon = (pokemon) => {
   const { name, id, weight, height, types, stats, sprites } = pokemon;
   if (name.length > 8) {
     pokemonNameId.innerHTML = "";
@@ -160,7 +137,6 @@ const showPokemon = (pokemon) => {
     pokemonNameId.style.gap = "60px";
     scrollText();
   } else {
-    clearInterval(scrollInterval);
     pokemonNameId.innerHTML = `<spam id="pokemon-name">${name}</spam> <span id="pokemon-id">No.${id
       .toString()
       .padStart(4, "0")}</span>`;
@@ -186,6 +162,37 @@ const showPokemon = (pokemon) => {
     .join(" ");
 };
 
+const displayPokemonNotFound = () => {
+  pokemonTypes.innerHTML = "";
+  pokemonNameId.innerHTML = "";
+  for (let i = 0; i < 3; i++) {
+    pokemonNameId.innerHTML += `<spam id="pokemon-name">POKEMON NOT FOUND <span id="pokemon-id">No.0000</span>
+    </spam> `;
+  }
+  pokemonNameId.style.gap = "60px";
+  pokemonImage.src = "./img/whoIsPokemon.webp";
+  pokemonWeight.innerText = "??";
+  pokemonHeight.innerText = "??";
+  pokemonHp.innerText = "??";
+  pokemonAttack.innerText = "??";
+  pokemonDefense.innerText = "????";
+  pokemonSpecialAttack.innerText = "????";
+  pokemonSpecialDefense.innerText = "????";
+  pokemonSpeed.innerText = "??";
+  pokemonTypes.innerHTML = `<span class="unknown type-tag">UNKNOWN</span>`;
+  scrollText();
+};
+
+const fillPorcentBar = (stats) => {
+  for (const stat of stats) {
+    const bar = document.getElementById(`${stat.stat.name}-bar`);
+    const value = stat.base_stat;
+    const maxValue = maxStats[stat.stat.name];
+    const percentage = ((value / maxValue) * 100).toFixed(2);
+    bar.style.width = `${percentage}%`;
+  }
+};
+
 inputSearch.addEventListener("input", async () => {
   await handbleChangeInput();
 });
@@ -196,12 +203,23 @@ btnUp.addEventListener("click", () => {
 });
 
 btnDown.addEventListener("click", () => {
-  stage = stage < 2 ? stage + 1 : stage;
+  stage = stage < 3 ? stage + 1 : stage;
   stageController(stage);
 });
 
+btnLeft.addEventListener("click", async () => {
+  idPokemon = idPokemon > 1 ? idPokemon - 1 : idPokemon;
+  localStorage.setItem("idPokemon", idPokemon);
+  showPokemon(await getPokemon(idPokemon));
+});
+
+btnRight.addEventListener("click", async () => {
+  idPokemon = idPokemon < 898 ? idPokemon + 1 : idPokemon;
+  localStorage.setItem("idPokemon", idPokemon);
+  showPokemon(await getPokemon(idPokemon));
+});
+
 window.onload = async () => {
-  const randomId = Math.floor(Math.random() * 898);
-  showPokemon(await getPokemon(randomId));
+  showPokemon(await getPokemon(idPokemon));
   stageController(0);
 };
