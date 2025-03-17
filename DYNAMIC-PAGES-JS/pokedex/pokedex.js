@@ -55,6 +55,18 @@ const getPokemon = async (idOrName) => {
 const stageController = () => {
   switch (stage) {
     case 0:
+      inputSearch.disabled = false;
+      inputSearch.focus();
+      infoBase.style.display = "flex";
+      infoExtra.style.display = "none";
+      navigateRight.style.display = "none";
+      navigateLeft.style.display = "none";
+      navigateDown.style.display = "block";
+      navigateUp.style.display = "none";
+      break;
+    case 1:
+      inputSearch.disabled = true;
+      inputSearch.blur();
       infoBase.style.display = "flex";
       infoExtra.style.display = "none";
       navigateRight.style.display = "block";
@@ -62,7 +74,7 @@ const stageController = () => {
       navigateDown.style.display = "block";
       navigateUp.style.display = "none";
       break;
-    case 1:
+    case 2:
       navigateRight.style.display = "none";
       navigateLeft.style.display = "none";
       navigateUp.style.display = "block";
@@ -72,7 +84,7 @@ const stageController = () => {
       infoExtra1.style.display = "block";
       infoExtra2.style.display = "none";
       break;
-    case 2:
+    case 3:
       infoExtra1.style.display = "none";
       infoExtra2.style.display = "block";
       break;
@@ -191,7 +203,7 @@ btnUp.addEventListener("click", () => {
 });
 
 btnDown.addEventListener("click", () => {
-  stage = stage < 2 ? stage + 1 : stage;
+  stage = stage < 3 ? stage + 1 : stage;
   stageController(stage);
 });
 
