@@ -87,6 +87,7 @@ const stageController = () => {
     case 3:
       infoExtra1.style.display = "none";
       infoExtra2.style.display = "block";
+      navigateDown.style.display = "none";
       break;
     default:
       console.error("Invalid stage:", stage);
@@ -208,12 +209,14 @@ btnDown.addEventListener("click", () => {
 });
 
 btnLeft.addEventListener("click", async () => {
+  if (stage != 1) return;
   idPokemon = idPokemon > 1 ? idPokemon - 1 : idPokemon;
   localStorage.setItem("idPokemon", idPokemon);
   showPokemon(await getPokemon(idPokemon));
 });
 
 btnRight.addEventListener("click", async () => {
+  if (stage != 1) return;
   idPokemon = idPokemon < 898 ? idPokemon + 1 : idPokemon;
   localStorage.setItem("idPokemon", idPokemon);
   showPokemon(await getPokemon(idPokemon));
