@@ -162,10 +162,10 @@ const projects = [
     lastUpdate: "2024-09-14T10:10:00",
   },
   {
-    title: "Number Converter",
+    title: "Number System Converter",
     description:
       "This tool allows you to convert numbers between different number systems quickly and easily, including binary, hexadecimal, octal.",
-    image: "./image/preview_num-to-roman.webp",
+    image: "./image/preview_num_system_converter.webp",
     status: "Completed",
     link: "./DYNAMIC-PAGES-JS/num-system-converter/num-system-converter.html",
     category: "dynamicPagesJS",
