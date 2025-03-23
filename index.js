@@ -147,7 +147,7 @@ const projects = [
       "A portfolio of web development projects, showcasing skills, technologies, and the various projects I have developed.",
     image: "./image/preview_personal_portfolio.webp",
     status: "Development",
-    link: "./WEB-RESPONSIVE/personal-portafolio/personal-portafolio.html",
+    link: "./WEB-RESPONSIVE/personal-portfolio/personal-portfolio.html",
     category: "responsiveWebDesing",
     lastUpdate: "2024-07-05T16:20:00",
   },
