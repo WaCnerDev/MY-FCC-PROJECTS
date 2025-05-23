@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pomodoro Clock</title>
+    <link rel="stylesheet" href="pomodoro-clock.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
+    <script src="pomodoro-clock.js" defer></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body class="bg-dark">
+    <div class="container mt-5 text-white">
+      <h1 class="text-center">Pomodoro Clock</h1>
+      <div class="row mt-5">
+        <div class="col-md-5 border">
+          <label id="break-label" for="break-length-conf" class="form-label">Break Length</label>
+          <div class="input-group" id="break-length-conf" name="break-length-conf">
+            <button
+              class="btn btn-outline-secondary"
+              type="button"
+              id="break-decrement"
+            >
+              +
+            </button>
+            <span class="input-group-text" id="break-length">5</span>
+            <button
+              class="btn btn-outline-secondary"
+              type="button"
+              id="break-increment"
+            >
+              -
+            </button>
+          </div>
+        </div>
+        <div class="col-md-5 border">
+          <label id="session-label" for="session-length-conf" class="form-label">Session Length</label>
+          <div class="input-group" id="session-length-conf" name="session-length-conf">
+            <button
+              class="btn btn-outline-secondary"
+              type="button"
+              id="session-decrement"
+            >
+              +
+            </button>
+            <span class="input-group-text" id="session-length">25</span>
+            <button
+              class="btn btn-outline-secondary"
+              type="button"
+              id="session-increment"
+            >
+              -
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-5" id="timer-container">
+        <label id="timer-label" for="time-left" class="form-label">Session</label>
+        <div id="time-left" class="text-center" name="time-left">25:00</div>
+        <div class="row justify-content-center mt-5">
+          <div class="col-md-6">
+            <div class="input-group">
+              <button
+                id="start_stop"
+                class="btn btn-outline-secondary btn-lg"
+                type="button"
+              >
+                Start
+              </button>
+              <button
+                id="reset"
+                class="btn btn-outline-secondary btn-lg"
+                type="button"
+              >
+                Reset
+              </button>
+            </div>
+          </div>
+      </div>
+      </div>
+    
+  </body>
+  <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+</html>
