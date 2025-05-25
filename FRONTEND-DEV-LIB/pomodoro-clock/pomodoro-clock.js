@@ -1,4 +1,4 @@
-function createLengthInput(
+const createLengthInput = (
   labelText,
   idLabel,
   min,
@@ -9,7 +9,7 @@ function createLengthInput(
   incrementId,
   onDecrement,
   onIncrement
-) {
+) => {
   const $label = $("<label>", {
     for: inputId,
     class: "form-label",
@@ -40,13 +40,11 @@ function createLengthInput(
     text: "+",
   });
 
-  const $inputGroup = $("<div>", { class: "input-group" }).append(
-    $btnDecrement,
-    $input,
-    $btnIncrement
-  );
+  const $inputGroup = $("<div>")
+    .addClass("input-group d-flex justify-content-center")
+    .append($btnDecrement, $input, $btnIncrement);
 
-  $btnDecrement.on("click", function () {
+  $btnDecrement.on("click", () => {
     let currentValue = parseInt($input.val());
     if (currentValue > min) {
       currentValue--;
@@ -55,7 +53,7 @@ function createLengthInput(
     }
   });
 
-  $btnIncrement.on("click", function () {
+  $btnIncrement.on("click", () => {
     let currentValue = parseInt($input.val());
     if (currentValue < max) {
       currentValue++;
@@ -67,15 +65,9 @@ function createLengthInput(
   return $("<div>")
     .addClass("d-flex flex-column justify-content-center align-items-center")
     .append($label, $inputGroup);
-}
+};
 
-function createTimeLeft(timeLeft, idTimerLabel, isRunning) {
-  function formatTimeLeft(seconds) {
-    const mm = String(Math.floor(seconds / 60)).padStart(2, "0");
-    const ss = String(seconds % 60).padStart(2, "0");
-    return `${mm}:${ss}`;
-  }
-
+const createTimeLeft = (timeLeft, idTimerLabel) => {
   const $label = $("<label>", {
     for: "time-left",
     class: "form-label",
@@ -87,15 +79,50 @@ function createTimeLeft(timeLeft, idTimerLabel, isRunning) {
   const $timeLeft = $("<div>", {
     id: "time-left",
     class: "text-center",
-    text: formatTimeLeft(timeLeft),
+    text: timeLeft,
   });
 
-  return $("<div>").append($label, $timeLeft);
-}
+  return $("<div>")
+    .addClass("d-flex flex-column justify-content-center align-items-center")
+    .append($label, $timeLeft);
+};
 
-$(function () {
+const createBtnPlayPause = (onPlayPause) => {
+  const $btnPlayPause = $("<button>", {
+    id: "start_stop",
+    class: "btn btn-primary",
+    type: "button",
+    text: "▶️",
+  });
+
+  $btnPlayPause.on("click", () => {
+    onPlayPause();
+  });
+
+  return $btnPlayPause;
+};
+
+const createBtnReset = (onReset) => {
+  const $btnReset = $("<button>", {
+    id: "reset",
+    class: "btn btn-danger",
+    type: "button",
+    text: "🔄",
+  });
+
+  $btnReset.on("click", () => {
+    onReset();
+  });
+
+  return $btnReset;
+};
+
+$(() => {
   let pomodoroLength = 25;
   let breakLength = 5;
+  let isRunning = false;
+  let timerInterval;
+
   const $pomodoroLength = createLengthInput(
     "Pomodoro Length",
     "session-label",
@@ -105,10 +132,10 @@ $(function () {
     "session-length",
     "session-decrement",
     "session-increment",
-    function (value) {
+    (value) => {
       pomodoroLength = value;
     },
-    function (value) {
+    (value) => {
       pomodoroLength = value;
     }
   );
@@ -122,19 +149,69 @@ $(function () {
     "break-length",
     "break-decrement",
     "break-increment",
-    function (value) {
+    (value) => {
       breakLength = value;
-      console.log("Break length set to:", value);
     },
-    function (value) {
+    (value) => {
       breakLength = value;
-      console.log("Break length set to:", value);
     }
   );
+  const formatTimeLeft = (seconds) => {
+    const mm = String(Math.floor(seconds / 60)).padStart(2, "0");
+    const ss = String(seconds % 60).padStart(2, "0");
+    return `${mm}:${ss}`;
+  };
 
-  const $timeLeft = createTimeLeft(1500, "timer-label", false);
+  const $timeLeft = createTimeLeft(formatTimeLeft(1500), "timer-label", false);
+
+  const playTimer = () => {
+    let timeLeft = pomodoroLength * 60;
+
+    if (timerInterval) {
+      clearInterval(timerInterval);
+    }
+
+    timerInterval = setInterval(() => {
+      if (isRunning) {
+        timeLeft--;
+        $("#time-left").text(formatTimeLeft(timeLeft));
+        if (timeLeft <= 0) {
+          clearInterval(timerInterval);
+          isRunning = false;
+          $btnPlayPause.text("▶️");
+        }
+      }
+    }, 1000);
+  };
+
+  const resetTimer = () => {
+    clearInterval(timerInterval);
+    isRunning = false;
+    $btnPlayPause.text("▶️");
+    $("#time-left").text(formatTimeLeft(25 * 60));
+    $("#break-length").val(5);
+    $("#session-length").val(25);
+  };
+
+  const $btnPlayPause = createBtnPlayPause(() => {
+    isRunning = !isRunning;
+    $btnPlayPause.text(isRunning ? "⏸️" : "▶️");
+    if (isRunning) {
+      playTimer();
+    } else {
+      clearInterval(timerInterval);
+    }
+  });
+
+  const $btnReset = createBtnReset(() => {
+    resetTimer();
+  });
+
+  const $containerControls = $("<div>")
+    .addClass("d-flex justify-content-center gap-5")
+    .append($btnPlayPause, $btnReset);
 
   $("#break-length-container").append($breakLength);
   $("#session-length-container").append($pomodoroLength);
-  $("#timer-container").append($timeLeft);
+  $("#timer-container").append($timeLeft, $containerControls);
 });

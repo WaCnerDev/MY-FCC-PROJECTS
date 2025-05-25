@@ -1,0 +1,25 @@
+body {
+  font-family: Play, sans-serif !important;
+}
+
+h1 {
+  text-transform: uppercase;
+  font-size: 60px !important;
+}
+
+#time-left {
+  font-size: 60px !important;
+}
+
+.form-label {
+  font-size: 2rem;
+}
+
+#session-length,
+#break-length {
+  max-width: 100px;
+}
+
+#main-content {
+  margin-top: 20vh !important;
+}
