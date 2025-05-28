@@ -118,9 +118,12 @@ const createBtnReset = (onReset) => {
 };
 
 $(() => {
-  let pomodoroLength = 25;
-  let breakLength = 5;
+  const timeSettings = {
+    session: 25,
+    break: 5,
+  };
   let isRunning = false;
+  let timeState = "session";
   let timerInterval;
 
   const $pomodoroLength = createLengthInput(
@@ -128,15 +131,37 @@ $(() => {
     "session-label",
     1,
     60,
-    pomodoroLength,
+    timeSettings.session,
     "session-length",
     "session-decrement",
     "session-increment",
     (value) => {
-      pomodoroLength = value;
+      timeSettings.session = value;
+      if (timeState === "session") {
+        updateInfo(
+          "Session",
+          formatTimeLeft(transformMinutesToSeconds(timeSettings.session))
+        );
+      } else {
+        updateInfo(
+          "Break",
+          formatTimeLeft(transformMinutesToSeconds(timeSettings.break))
+        );
+      }
     },
     (value) => {
-      pomodoroLength = value;
+      timeSettings.session = value;
+      if (timeState === "session") {
+        updateInfo(
+          "Session",
+          formatTimeLeft(transformMinutesToSeconds(timeSettings.session))
+        );
+      } else {
+        updateInfo(
+          "Break",
+          formatTimeLeft(transformMinutesToSeconds(timeSettings.break))
+        );
+      }
     }
   );
 
@@ -145,32 +170,92 @@ $(() => {
     "break-label",
     1,
     60,
-    breakLength,
+    timeSettings.break,
     "break-length",
     "break-decrement",
     "break-increment",
     (value) => {
-      breakLength = value;
+      timeSettings.break = value;
+      if (timeState === "break") {
+        updateInfo(
+          "Break",
+          formatTimeLeft(transformMinutesToSeconds(timeSettings.break))
+        );
+      } else {
+        updateInfo(
+          "Session",
+          formatTimeLeft(transformMinutesToSeconds(timeSettings.session))
+        );
+      }
     },
     (value) => {
-      breakLength = value;
+      timeSettings.break = value;
+      if (timeState === "break") {
+        updateInfo(
+          "Break",
+          formatTimeLeft(transformMinutesToSeconds(timeSettings.break))
+        );
+      } else {
+        updateInfo(
+          "Session",
+          formatTimeLeft(transformMinutesToSeconds(timeSettings.session))
+        );
+      }
     }
   );
+
+  const updateInfo = (timeLabel, timeLeft) => {
+    $("#time-left").text(timeLeft);
+    $("#timer-label").text(timeLabel);
+  };
+
+  const switchToBreak = () => {
+    isRunning = true;
+    timeState = "break";
+    updateInfo(
+      "Break",
+      formatTimeLeft(transformMinutesToSeconds(timeSettings.break))
+    );
+    playTimer(transformMinutesToSeconds(timeSettings.break));
+  };
+
+  const switchToSession = () => {
+    isRunning = true;
+    timeState = "session";
+    updateInfo(
+      "Session",
+      formatTimeLeft(transformMinutesToSeconds(timeSettings.session))
+    );
+    playTimer(transformMinutesToSeconds(timeSettings.session));
+  };
+
+  //da el formato que se muestra en el temporizador
+  //mm:ss
+  //donde mm son los minutos y ss los segundos
   const formatTimeLeft = (seconds) => {
     const mm = String(Math.floor(seconds / 60)).padStart(2, "0");
     const ss = String(seconds % 60).padStart(2, "0");
     return `${mm}:${ss}`;
   };
 
-  const $timeLeft = createTimeLeft(formatTimeLeft(1500), "timer-label", false);
+  const transformMinutesToSeconds = (minutes) => {
+    return minutes * 60;
+  };
 
-  const playTimer = () => {
-    let timeLeft = pomodoroLength * 60;
+  const $timeLeft = createTimeLeft(
+    formatTimeLeft(transformMinutesToSeconds(timeSettings.session)),
+    "timer-label",
+    false
+  );
 
+  //Esta funcion solo se encarga de hacer el conteo del tiempo
+  //y de actualizar el tiempo restante en el DOM
+  const playTimer = (
+    timeLeft = transformMinutesToSeconds(timeSettings.session)
+  ) => {
     if (timerInterval) {
       clearInterval(timerInterval);
     }
-
     timerInterval = setInterval(() => {
       if (isRunning) {
         timeLeft--;
@@ -178,7 +263,7 @@ $(() => {
         if (timeLeft <= 0) {
           clearInterval(timerInterval);
           isRunning = false;
-          $btnPlayPause.text("▶️");
+          timeState === "session" ? switchToBreak() : switchToSession();
         }
       }
     }, 1000);
@@ -188,9 +273,13 @@ $(() => {
     clearInterval(timerInterval);
     isRunning = false;
     $btnPlayPause.text("▶️");
-    $("#time-left").text(formatTimeLeft(25 * 60));
-    $("#break-length").val(5);
-    $("#session-length").val(25);
+    timeSettings.break = 5;
+    timeSettings.session = 25;
+    $("#break-length").val(timeSettings.break);
+    $("#session-length").val(timeSettings.session);
+    $("#time-left").text(
+      formatTimeLeft(transformMinutesToSeconds(timeSettings.session))
+    );
   };
 
   const $btnPlayPause = createBtnPlayPause(() => {
