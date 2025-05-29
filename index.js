@@ -1,8 +1,11 @@
-const responsiveWebDesing = document.querySelector(
+const responsiveWebDesign = document.querySelector(
   "#responsive-web .project-cards"
 );
 const dynamicPagesJS = document.querySelector(
   "#dynamic-pages-js .project-cards"
+);
+const frontendDevLib = document.querySelector(
+  "#frontend-dev-libraries .project-cards"
 );
 
 function fromStatusToColor(status) {
@@ -48,7 +51,7 @@ function formatDate(date) {
     typeDiff = "minute";
   } else {
     timeAgo = `${diffInSeconds} second${diffInSeconds > 1 ? "s" : ""} ago`;
-    typeDiff= "second";
+    typeDiff = "second";
   }
 
   return `<p class="value ${typeDiff}" data-last-update="${date}">${timeAgo}</p>`;
@@ -108,7 +111,7 @@ const projects = [
     image: "./image/preview_form.webp",
     status: "Completed",
     link: "./WEB-RESPONSIVE/survey-form/survey-form.html",
-    category: "responsiveWebDesing",
+    category: "responsiveWebDesign",
     lastUpdate: "2024-05-12T14:30:00",
   },
   {
@@ -118,7 +121,7 @@ const projects = [
     image: "./image/preview_technical_doc.webp",
     status: "Completed",
     link: "./WEB-RESPONSIVE/tecnical-doc/tecnical-doc.html",
-    category: "responsiveWebDesing",
+    category: "responsiveWebDesign",
     lastUpdate: "2024-02-22T09:15:00",
   },
   {
@@ -128,7 +131,7 @@ const projects = [
     image: "./image/preview_store_trombones.webp",
     status: "Completed",
     link: "./WEB-RESPONSIVE/trombones-store/trombones-store.html",
-    category: "responsiveWebDesing",
+    category: "responsiveWebDesign",
     lastUpdate: "2024-11-30T18:45:00",
   },
   {
@@ -138,7 +141,7 @@ const projects = [
     image: "./image/preview_tribute_page.webp",
     status: "Completed",
     link: "./WEB-RESPONSIVE/tribute-pages/tribute-pages.html",
-    category: "responsiveWebDesing",
+    category: "responsiveWebDesign",
     lastUpdate: "2025-01-10T12:00:00",
   },
   {
@@ -148,7 +151,7 @@ const projects = [
     image: "./image/preview_personal_portfolio.webp",
     status: "Development",
     link: "./WEB-RESPONSIVE/personal-portfolio/personal-portfolio.html",
-    category: "responsiveWebDesing",
+    category: "responsiveWebDesign",
     lastUpdate: "2024-07-05T16:20:00",
   },
   {
@@ -201,6 +204,26 @@ const projects = [
     category: "dynamicPagesJS",
     lastUpdate: "2025-03-08T11:58:00",
   },
+  {
+    title: "Pomodoro Clock",
+    description:
+      "A Pomodoro clock that helps you manage your time effectively, with customizable work and break intervals.",
+    image: "./image/preview_pomodoro-clock.webp",
+    status: "Development",
+    link: "./FRONTEND-DEV-LIB/pomodoro-clock/pomodoro-clock.html",
+    category: "frontendDevLib",
+    lastUpdate: "2025-03-08T11:58:00",
+  },
+  {
+    title: "Jquery Calculator",
+    description:
+      "A simple calculator built with jQuery, allowing basic arithmetic operations.",
+    image: "./image/preview_jquery-calculator.webp",
+    status: "Development",
+    link: "./FRONTEND-DEV-LIB/jquery-calculator/jquery-calculator.html",
+    category: "frontendDevLib",
+    lastUpdate: "2025-03-08T11:58:00",
+  },
 ];
 
 projects.forEach((project) => {
@@ -212,10 +235,13 @@ projects.forEach((project) => {
     project.link,
     project.lastUpdate
   );
-  if (project.category === "responsiveWebDesing") {
-    responsiveWebDesing.appendChild(card);
+
+  if (project.category === "responsiveWebDesign") {
+    responsiveWebDesign.appendChild(card);
   } else if (project.category === "dynamicPagesJS") {
     dynamicPagesJS.appendChild(card);
+  } else if (project.category === "frontendDevLib") {
+    frontendDevLib.appendChild(card);
   }
 });
 
