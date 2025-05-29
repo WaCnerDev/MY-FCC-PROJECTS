@@ -205,10 +205,40 @@ const projects = [
     lastUpdate: "2025-03-08T11:58:00",
   },
   {
+    title: "Random Quote Machine",
+    description:
+      "A random quote generator that fetches quotes from an API and displays them in a visually appealing way.",
+    image: "./image/preview_random_quote_machine.webp",
+    status: "Completed",
+    link: "https://codepen.io/WaCnerDev/pen/wBvVLjq",
+    category: "frontendDevLib",
+    lastUpdate: "2024-08-20T15:45:00",
+  },
+  {
+    title: "Markdown Previewer",
+    description:
+      "A Markdown previewer that allows you to write and preview Markdown content in real-time.",
+    image: "./image/preview_markdown_previewer.webp",
+    status: "Development",
+    link: "https://codepen.io/WaCnerDev/pen/bNNGYre",
+    category: "frontendDevLib",
+    lastUpdate: "2024-10-05T13:30:00",
+  },
+  {
+    title: "Drum Machine",
+    description:
+      "A drum machine that allows you to play different drum sounds by clicking on buttons or using your keyboard.",
+    image: "./image/preview_drum_machine.webp",
+    status: "Development",
+    link: "https://codepen.io/WaCnerDev/pen/emmpqLM",
+    category: "frontendDevLib",
+    lastUpdate: "2024-11-15T17:20:00",
+  },
+  {
     title: "Pomodoro Clock",
     description:
       "A Pomodoro clock that helps you manage your time effectively, with customizable work and break intervals.",
-    image: "./image/preview_pomodoro-clock.webp",
+    image: "./image/preview_pomodoro_clock.webp",
     status: "Development",
     link: "./FRONTEND-DEV-LIB/pomodoro-clock/pomodoro-clock.html",
     category: "frontendDevLib",
@@ -218,7 +248,7 @@ const projects = [
     title: "Jquery Calculator",
     description:
       "A simple calculator built with jQuery, allowing basic arithmetic operations.",
-    image: "./image/preview_jquery-calculator.webp",
+    image: "./image/preview_jquery_calculator.webp",
     status: "Development",
     link: "./FRONTEND-DEV-LIB/jquery-calculator/jquery-calculator.html",
     category: "frontendDevLib",
