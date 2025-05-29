@@ -7,8 +7,7 @@ const createLengthInput = (
   inputId,
   decrementId,
   incrementId,
-  onDecrement,
-  onIncrement
+  onChange
 ) => {
   const $label = $("<label>", {
     for: inputId,
@@ -29,8 +28,9 @@ const createLengthInput = (
     type: "number",
     class: "form-control text-center",
     value: defaultValue,
-    min: min,
-    max: max,
+    min,
+    max,
+    readonly: true,
   });
 
   const $btnIncrement = $("<button>", {
@@ -40,27 +40,20 @@ const createLengthInput = (
     text: "+",
   });
 
+  const updateValue = (delta) => {
+    let value = parseInt($input.val()) + delta;
+    if (value >= min && value <= max) {
+      $input.val(value);
+      onChange(value);
+    }
+  };
+
+  $btnDecrement.on("click", () => updateValue(-1));
+  $btnIncrement.on("click", () => updateValue(1));
+
   const $inputGroup = $("<div>")
     .addClass("input-group d-flex justify-content-center")
     .append($btnDecrement, $input, $btnIncrement);
-
-  $btnDecrement.on("click", () => {
-    let currentValue = parseInt($input.val());
-    if (currentValue > min) {
-      currentValue--;
-      $input.val(currentValue);
-      onDecrement(currentValue);
-    }
-  });
-
-  $btnIncrement.on("click", () => {
-    let currentValue = parseInt($input.val());
-    if (currentValue < max) {
-      currentValue++;
-      $input.val(currentValue);
-      onIncrement(currentValue);
-    }
-  });
 
   return $("<div>")
     .addClass("d-flex flex-column justify-content-center align-items-center")
@@ -72,7 +65,6 @@ const createTimeLeft = (timeLeft, idTimerLabel) => {
     for: "time-left",
     class: "form-label",
     text: "Session",
-    name: "time-left",
     id: idTimerLabel,
   });
 
@@ -87,44 +79,104 @@ const createTimeLeft = (timeLeft, idTimerLabel) => {
     .append($label, $timeLeft);
 };
 
-const createBtnPlayPause = (onPlayPause) => {
-  const $btnPlayPause = $("<button>", {
-    id: "start_stop",
-    class: "btn btn-primary",
+const createButton = (idBtn, className, textP, onClick) => {
+  const $btn = $("<button>", {
+    id: idBtn,
+    class: className,
     type: "button",
-    text: "▶️",
+    text: textP,
   });
-
-  $btnPlayPause.on("click", () => {
-    onPlayPause();
+  $btn.on("click", () => {
+    onClick();
   });
-
-  return $btnPlayPause;
-};
-
-const createBtnReset = (onReset) => {
-  const $btnReset = $("<button>", {
-    id: "reset",
-    class: "btn btn-danger",
-    type: "button",
-    text: "🔄",
-  });
-
-  $btnReset.on("click", () => {
-    onReset();
-  });
-
-  return $btnReset;
+  return $btn;
 };
 
 $(() => {
-  const timeSettings = {
-    session: 25,
-    break: 5,
-  };
+  const timeSettings = { session: 25, break: 5 };
   let isRunning = false;
   let timeState = "session";
   let timerInterval;
+  let alarmInterval;
+  let currentSeconds = timeSettings.session * 60;
+
+  const formatTimeLeft = (seconds) =>
+    `${String(Math.floor(seconds / 60)).padStart(2, "0")}:${String(
+      seconds % 60
+    ).padStart(2, "0")}`;
+
+  const updateInfo = () => {
+    $("#time-left").text(formatTimeLeft(currentSeconds));
+    $("#timer-label").text(timeState === "session" ? "Session" : "Break");
+  };
+
+  const switchState = () => {
+    timeState = timeState === "session" ? "break" : "session";
+    currentSeconds = timeSettings[timeState] * 60;
+    updateInfo();
+    playTimer();
+  };
+
+  const stopAlarm = () => {
+    clearInterval(alarmInterval);
+    $("#beep").get(0).pause();
+    $("#beep").get(0).currentTime = 0; // Resetea el tiempo del audio
+  };
+
+  const playAlarm = () => {
+    clearInterval(alarmInterval);
+    $("#beep").get(0).play();
+    alarmInterval = setTimeout(() => {
+      stopAlarm();
+    }, 2000); // Detiene el sonido después de 2 segundos
+  };
+
+  const playTimer = () => {
+    clearInterval(timerInterval);
+    timerInterval = setInterval(() => {
+      if (!isRunning) return;
+      currentSeconds--;
+      updateInfo();
+      if (currentSeconds < 0) {
+        clearInterval(timerInterval);
+        playAlarm();
+        switchState();
+      }
+    }, 1000);
+  };
+
+  const resetTimer = () => {
+    clearInterval(timerInterval);
+    stopAlarm();
+    isRunning = false;
+
+    // Resetea las configuraciones de tiempo primero
+    timeSettings.session = 25;
+    timeSettings.break = 5;
+
+    // Asegura que los inputs reflejen los valores por defecto
+    $("#break-length").val(timeSettings.break);
+    $("#session-length").val(timeSettings.session);
+
+    // Resetea el estado del temporizador
+    timeState = "session";
+    currentSeconds = timeSettings.session * 60; // Esto será 25 * 60 = 1500
+
+    // Asegura que el botón de play/pause vuelva a "Play"
+    $btnPlayPause.text("▶️");
+
+    // Finalmente, actualiza la visualización para que muestre el tiempo de sesión por defecto
+    // Esto asegura que time-left muestre 25:00 y timer-label muestre "Session"
+    updateInfo();
+  };
+
+  const handleLengthChange = (type, value) => {
+    timeSettings[type] = value;
+    if (timeState === type) {
+      currentSeconds = value * 60;
+      updateInfo();
+    }
+  };
 
   const $pomodoroLength = createLengthInput(
     "Pomodoro Length",
@@ -135,34 +187,7 @@ $(() => {
     "session-length",
     "session-decrement",
     "session-increment",
-    (value) => {
-      timeSettings.session = value;
-      if (timeState === "session") {
-        updateInfo(
-          "Session",
-          formatTimeLeft(transformMinutesToSeconds(timeSettings.session))
-        );
-      } else {
-        updateInfo(
-          "Break",
-          formatTimeLeft(transformMinutesToSeconds(timeSettings.break))
-        );
-      }
-    },
-    (value) => {
-      timeSettings.session = value;
-      if (timeState === "session") {
-        updateInfo(
-          "Session",
-          formatTimeLeft(transformMinutesToSeconds(timeSettings.session))
-        );
-      } else {
-        updateInfo(
-          "Break",
-          formatTimeLeft(transformMinutesToSeconds(timeSettings.break))
-        );
-      }
-    }
+    (value) => handleLengthChange("session", value)
   );
 
   const $breakLength = createLengthInput(
@@ -174,127 +199,27 @@ $(() => {
     "break-length",
     "break-decrement",
     "break-increment",
-    (value) => {
-      timeSettings.break = value;
-      if (timeState === "break") {
-        updateInfo(
-          "Break",
-          formatTimeLeft(transformMinutesToSeconds(timeSettings.break))
-        );
-      } else {
-        updateInfo(
-          "Session",
-          formatTimeLeft(transformMinutesToSeconds(timeSettings.session))
-        );
-      }
-    },
-    (value) => {
-      timeSettings.break = value;
-      if (timeState === "break") {
-        updateInfo(
-          "Break",
-          formatTimeLeft(transformMinutesToSeconds(timeSettings.break))
-        );
-      } else {
-        updateInfo(
-          "Session",
-          formatTimeLeft(transformMinutesToSeconds(timeSettings.session))
-        );
-      }
-    }
+    (value) => handleLengthChange("break", value)
   );
-
-  const updateInfo = (timeLabel, timeLeft) => {
-    $("#time-left").text(timeLeft);
-    $("#timer-label").text(timeLabel);
-  };
-
-  const switchToBreak = () => {
-    isRunning = true;
-    timeState = "break";
-    updateInfo(
-      "Break",
-      formatTimeLeft(transformMinutesToSeconds(timeSettings.break))
-    );
-    playTimer(transformMinutesToSeconds(timeSettings.break));
-  };
-
-  const switchToSession = () => {
-    isRunning = true;
-    timeState = "session";
-    updateInfo(
-      "Session",
-      formatTimeLeft(transformMinutesToSeconds(timeSettings.session))
-    );
-    playTimer(transformMinutesToSeconds(timeSettings.session));
-  };
-
-  //da el formato que se muestra en el temporizador
-  //mm:ss
-  //donde mm son los minutos y ss los segundos
-  const formatTimeLeft = (seconds) => {
-    const mm = String(Math.floor(seconds / 60)).padStart(2, "0");
-    const ss = String(seconds % 60).padStart(2, "0");
-    return `${mm}:${ss}`;
-  };
-
-  const transformMinutesToSeconds = (minutes) => {
-    return minutes * 60;
-  };
 
   const $timeLeft = createTimeLeft(
-    formatTimeLeft(transformMinutesToSeconds(timeSettings.session)),
-    "timer-label",
-    false
+    formatTimeLeft(currentSeconds),
+    "timer-label"
   );
 
-  //Esta funcion solo se encarga de hacer el conteo del tiempo
-  //y de actualizar el tiempo restante en el DOM
-  const playTimer = (
-    timeLeft = transformMinutesToSeconds(timeSettings.session)
-  ) => {
-    if (timerInterval) {
-      clearInterval(timerInterval);
+  const $btnPlayPause = createButton(
+    "start_stop",
+    "btn btn-primary",
+    "▶️",
+    () => {
+      isRunning = !isRunning;
+      $btnPlayPause.text(isRunning ? "⏸️" : "▶️");
+      if (isRunning) playTimer();
+      else clearInterval(timerInterval);
     }
-    timerInterval = setInterval(() => {
-      if (isRunning) {
-        timeLeft--;
-        $("#time-left").text(formatTimeLeft(timeLeft));
-        if (timeLeft <= 0) {
-          clearInterval(timerInterval);
-          isRunning = false;
-          timeState === "session" ? switchToBreak() : switchToSession();
-        }
-      }
-    }, 1000);
-  };
+  );
 
-  const resetTimer = () => {
-    clearInterval(timerInterval);
-    isRunning = false;
-    $btnPlayPause.text("▶️");
-    timeSettings.break = 5;
-    timeSettings.session = 25;
-    $("#break-length").val(timeSettings.break);
-    $("#session-length").val(timeSettings.session);
-    $("#time-left").text(
-      formatTimeLeft(transformMinutesToSeconds(timeSettings.session))
-    );
-  };
-
-  const $btnPlayPause = createBtnPlayPause(() => {
-    isRunning = !isRunning;
-    $btnPlayPause.text(isRunning ? "⏸️" : "▶️");
-    if (isRunning) {
-      playTimer();
-    } else {
-      clearInterval(timerInterval);
-    }
-  });
-
-  const $btnReset = createBtnReset(() => {
-    resetTimer();
-  });
+  const $btnReset = createButton("reset", "btn btn-danger", "🔄", resetTimer);
 
   const $containerControls = $("<div>")
     .addClass("d-flex justify-content-center gap-5")
@@ -303,4 +228,6 @@ $(() => {
   $("#break-length-container").append($breakLength);
   $("#session-length-container").append($pomodoroLength);
   $("#timer-container").append($timeLeft, $containerControls);
+
+  updateInfo();
 });
