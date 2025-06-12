@@ -1,5 +1,8 @@
 body {
   font-family: Play, sans-serif !important;
+  background: #5e378a;
+  background: linear-gradient(150deg, rgba(94, 55, 138, 1) 5%, rgba(136, 39, 138, 1) 35%, rgba(114, 66, 168, 1) 50%, rgba(136, 39, 138, 1) 65%, rgba(94, 55, 138, 1) 95%);
+  background-attachment: fixed;
 }
 
 h1 {
@@ -21,5 +24,12 @@ h1 {
 }
 
 #main-content {
-  margin-top: 20vh !important;
+  max-width: 500px;
+  min-width: 400px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px white solid;
+  border-radius: 10px;
 }
