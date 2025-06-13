@@ -219,7 +219,7 @@ const projects = [
     description:
       "A Markdown previewer that allows you to write and preview Markdown content in real-time.",
     image: "./image/preview_markdown_previewer.webp",
-    status: "Development",
+    status: "Completed",
     link: "https://codepen.io/WaCnerDev/pen/bNNGYre",
     category: "frontendDevLib",
     lastUpdate: "2024-10-05T13:30:00",
@@ -229,7 +229,7 @@ const projects = [
     description:
       "A drum machine that allows you to play different drum sounds by clicking on buttons or using your keyboard.",
     image: "./image/preview_drum_machine.webp",
-    status: "Development",
+    status: "Completed",
     link: "https://codepen.io/WaCnerDev/pen/emmpqLM",
     category: "frontendDevLib",
     lastUpdate: "2024-11-15T17:20:00",
@@ -239,7 +239,7 @@ const projects = [
     description:
       "A Pomodoro clock that helps you manage your time effectively, with customizable work and break intervals.",
     image: "./image/preview_pomodoro_clock.webp",
-    status: "Development",
+    status: "Completed",
     link: "./FRONTEND-DEV-LIB/pomodoro-clock/pomodoro-clock.html",
     category: "frontendDevLib",
     lastUpdate: "2025-03-08T11:58:00",
@@ -249,7 +249,7 @@ const projects = [
     description:
       "A simple calculator built with jQuery, allowing basic arithmetic operations.",
     image: "./image/preview_jquery_calculator.webp",
-    status: "Development",
+    status: "Completed",
     link: "./FRONTEND-DEV-LIB/jquery-calculator/jquery-calculator.html",
     category: "frontendDevLib",
     lastUpdate: "2025-03-08T11:58:00",
