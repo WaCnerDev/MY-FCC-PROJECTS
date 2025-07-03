@@ -16,51 +16,46 @@
   </head>
   <body class="bg-dark">
     <div class="container">
-      <div
-        class="calculator border border-2 rounded p-3 mx-auto bg-dark-subtle"
-        style="width: 250px; margin-top: 100px"
+      <div class="row">
+<div
+        class="calculator border border-2 rounded p-3 mx-auto mt-5 bg-dark-subtle col-md-6 col-sm-12"
       >
         <div
-          style="height: 50px; overflow-x: auto; white-space: nowrap"
+          style="height: 60px; overflow-x: auto; white-space: nowrap"
           id="display"
-          class="form-control my-2 overflow-hidden fs-4 d-flex justify-content-end align-items-center"
+          class="form-control my-2 fs-2 overflow-hidden d-flex justify-content-end align-items-center"
         ></div>
-        <div class="row justify-content-around mx-0">
-          <button id="clear" class="btn btn-danger col-2">C</button>
+        <div class="row mx-0 my-3">
+          <button id="clear" class="btn btn-danger col rounded-0 fs-4" style="height: 60px;">C</button>
           <button
             id="delete"
-            class="btn btn-secondary col-2 d-flex justify-content-center align-items-center"
+            class="btn btn-secondary d-flex justify-content-center align-items-center col rounded-0 fs-4"  style="height: 60px;"
           >
             DEL
           </button>
-          <button id="divide" class="btn btn-secondary col-2">/</button>
-          <button id="multiply" class="btn btn-secondary col-2">*</button>
+          <button id="equals" class="btn btn-primary col-6 rounded-0 fs-4" style="height: 60px;">=</button>
         </div>
-        <div class="row justify-content-around mx-0 mt-2">
-          <button id="seven" class="btn btn-light col-2">7</button>
-          <button id="eight" class="btn btn-light col-2">8</button>
-          <button id="nine" class="btn btn-light col-2">9</button>
-          <button id="subtract" class="btn btn-secondary col-2">-</button>
-        </div>
-        <div class="row justify-content-around mx-0 mt-2">
-          <button id="four" class="btn btn-light col-2">4</button>
-          <button id="five" class="btn btn-light col-2">5</button>
-          <button id="six" class="btn btn-light col-2">6</button>
-          <button id="add" class="btn btn-secondary col-2">+</button>
-        </div>
-        <div class="row justify-content-around mx-0 mt-2">
-          <button id="one" class="btn btn-light col-2">1</button>
-          <button id="two" class="btn btn-light col-2">2</button>
-          <button id="three" class="btn btn-light col-2">3</button>
-          <button id="equals" class="btn btn-primary col-2">=</button>
-        </div>
-        <div class="row justify-content-around mx-0 mt-2">
-          <button id="zero" class="btn btn-light col-8">0</button>
-          <button id="decimal" class="btn btn-light col-2">.</button>
-        </div>
+        <div class="row row-cols-4 mx-0 fs-1">
+          <button id="one" class="btn btn-light col rounded-0 fs-4" style="height: 60px;">1</button>
+          <button id="two" class="btn btn-light col rounded-0 fs-4" style="height: 60px;">2</button>
+          <button id="three" class="btn btn-light col rounded-0 fs-4" style="height: 60px;">3</button>
+          <button id="divide" class="btn btn-secondary col rounded-0 fs-4" style="height: 60px;">/</button>
+          <button id="four" class="btn btn-light col rounded-0 fs-4" style="height: 60px;">4</button>
+          <button id="five" class="btn btn-light col rounded-0 fs-4" style="height: 60px;">5</button>
+          <button id="six" class="btn btn-light col rounded-0 fs-4" style="height: 60px;">6</button>
+          <button id="multiply" class="btn btn-secondary col rounded-0 fs-4" style="height: 60px;">*</button>
+          <button id="seven" class="btn btn-light col rounded-0 fs-4" style="height: 60px;">7</button>
+          <button id="eight" class="btn btn-light col rounded-0 fs-4" style="height: 60px;">8</button>
+          <button id="nine" class="btn btn-light col rounded-0 fs-4" style="height: 60px;">9</button>
+          <button id="add" class="btn btn-secondary col rounded-0 fs-4" style="height: 60px;">+</button>
+          <button id="zero" class="btn btn-light col rounded-0 fs-4" style="height: 60px;">0</button>
+          <button id="decimal" class="btn btn-light col rounded-0 fs-4" style="height: 60px;">.</button>
+          <button class="btn btn-light col rounded-0 fs-4" style="height: 60px;"></button>
+          <button id="subtract" class="btn btn-secondary col rounded-0 fs-4" style="height: 60px;">-</button>
       </div>
     </div>
-    <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+      </div>
+      
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.8.0/math.min.js"></script>
   </body>
   </html>
