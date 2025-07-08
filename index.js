@@ -75,7 +75,15 @@ function truncateDescription(description) {
   return description;
 }
 
-function renderCards(title, description, status, image, link, lastUpdate) {
+function renderCards(
+  title,
+  description,
+  path,
+  status,
+  image,
+  link,
+  lastUpdate
+) {
   const card = document.createElement("div");
   card.classList.add("card");
   card.innerHTML = `
@@ -91,8 +99,11 @@ function renderCards(title, description, status, image, link, lastUpdate) {
           )}"></span>${status}</p>
         </div>
         <div class="field">
-          <p class="bold-label">Last Update:</p>
-          ${formatDate(lastUpdate)}
+          ${
+            path
+              ? `<img alt="GitHub last commit" style="width: 150px; margin-left: 40px;" src="https://img.shields.io/github/last-commit/WaCnerDev/MY-FCC-PROJECTS?path=${path}&style=flat&logoSize=auto&label=Last%20Commit%3A&color=%23404268">`
+              : ""
+          }
         </div>
       </div>  
     </div>
@@ -108,6 +119,7 @@ const projects = [
     title: "Survey Form",
     description:
       "A user-friendly form to collect information about your gaming preferences, designed with accessibility and responsiveness in mind.",
+    path: "WEB-RESPONSIVE%2fsurvey-form",
     image: "./image/preview_form.webp",
     status: "Completed",
     link: "./WEB-RESPONSIVE/survey-form/survey-form.html",
@@ -118,6 +130,7 @@ const projects = [
     title: "Technical Documentation",
     description:
       "JavaScript documentation website featuring sections, a navigation menu, and a responsive layout.",
+    path: "WEB-RESPONSIVE%2ftecnical-doc",
     image: "./image/preview_technical_doc.webp",
     status: "Completed",
     link: "./WEB-RESPONSIVE/tecnical-doc/tecnical-doc.html",
@@ -128,6 +141,7 @@ const projects = [
     title: "Landing Page Trombones",
     description:
       "Landing page for trombone sales with video, product section, and intuitive navigation.",
+    path: "WEB-RESPONSIVE%2ftrombones-store",
     image: "./image/preview_store_trombones.webp",
     status: "Completed",
     link: "./WEB-RESPONSIVE/trombones-store/trombones-store.html",
@@ -138,6 +152,7 @@ const projects = [
     title: "Tribute Page",
     description:
       "A tribute page dedicated to Nikola Tesla, highlighting his life, achievements, and legacy.",
+    path: "WEB-RESPONSIVE%2ftribute-pages",
     image: "./image/preview_tribute_page.webp",
     status: "Completed",
     link: "./WEB-RESPONSIVE/tribute-pages/tribute-pages.html",
@@ -148,6 +163,7 @@ const projects = [
     title: "Personal Portfolio",
     description:
       "A portfolio of web development projects, showcasing skills, technologies, and the various projects I have developed.",
+    path: "WEB-RESPONSIVE%2fpersonal-portfolio",
     image: "./image/preview_personal_portfolio.webp",
     status: "Development",
     link: "./WEB-RESPONSIVE/personal-portfolio/personal-portfolio.html",
@@ -158,6 +174,7 @@ const projects = [
     title: "Palindrome Checker",
     description:
       "This website allows users to check if a word or phrase is a palindrome.",
+    path: "DYNAMIC-PAGES-JS%2fpalindrome-checker",
     image: "./image/preview_palindrome.webp",
     status: "Completed",
     link: "./DYNAMIC-PAGES-JS/palindrome-checker/palindrome-checker.html",
@@ -168,6 +185,7 @@ const projects = [
     title: "Number System Converter",
     description:
       "This tool allows you to convert numbers between different number systems quickly and easily, including binary, hexadecimal, octal.",
+    path: "DYNAMIC-PAGES-JS%2fnum-system-converter",
     image: "./image/preview_num_system_converter.webp",
     status: "Completed",
     link: "./DYNAMIC-PAGES-JS/num-system-converter/num-system-converter.html",
@@ -178,6 +196,7 @@ const projects = [
     title: "Phone Number Validator",
     description:
       "Easily check the validity of U.S. phone numbers, no matter how they are formatted.",
+    path: "DYNAMIC-PAGES-JS%2fphone-validator",
     image: "./image/preview_phone-validator.webp",
     status: "Completed",
     link: "./DYNAMIC-PAGES-JS/phone-validator/phone-validator.html",
@@ -188,6 +207,7 @@ const projects = [
     title: "Cash Register",
     description:
       "This cash register app calculates change, displays the remaining cash in the drawer, and handles various transaction scenarios.",
+    path: "DYNAMIC-PAGES-JS%2fcash-register",
     image: "./image/preview_cash-register.webp",
     status: "Completed",
     link: "./DYNAMIC-PAGES-JS/cash-register/cash-register.html",
@@ -198,6 +218,7 @@ const projects = [
     title: "Pokedex from Game Boy",
     description:
       "A Pokedex that simulates the look and feel of a Game Boy. The buttons are functional, and you can search for Pokemon by ID or name.",
+    path: "DYNAMIC-PAGES-JS%2fpokedex",
     image: "./image/preview_pokedex.webp",
     status: "Development",
     link: "./DYNAMIC-PAGES-JS/pokedex/pokedex.html",
@@ -208,6 +229,7 @@ const projects = [
     title: "Random Quote Machine",
     description:
       "A random quote generator that fetches quotes from an API and displays them in a visually appealing way.",
+    path: undefined,
     image: "./image/preview_random_quote_machine.webp",
     status: "Completed",
     link: "https://codepen.io/WaCnerDev/pen/wBvVLjq",
@@ -218,6 +240,7 @@ const projects = [
     title: "Markdown Previewer",
     description:
       "A Markdown previewer that allows you to write and preview Markdown content in real-time.",
+    path: undefined,
     image: "./image/preview_markdown_previewer.webp",
     status: "Completed",
     link: "https://codepen.io/WaCnerDev/pen/bNNGYre",
@@ -228,6 +251,7 @@ const projects = [
     title: "Drum Machine",
     description:
       "A drum machine that allows you to play different drum sounds by clicking on buttons or using your keyboard.",
+    path: undefined,
     image: "./image/preview_drum_machine.webp",
     status: "Completed",
     link: "https://codepen.io/WaCnerDev/pen/emmpqLM",
@@ -238,6 +262,7 @@ const projects = [
     title: "Pomodoro Clock",
     description:
       "A Pomodoro clock that helps you manage your time effectively, with customizable work and break intervals.",
+    path: "FRONTEND-DEV-LIB%2fpomodoro-clock",
     image: "./image/preview_pomodoro_clock.webp",
     status: "Completed",
     link: "./FRONTEND-DEV-LIB/pomodoro-clock/pomodoro-clock.html",
@@ -248,6 +273,7 @@ const projects = [
     title: "Jquery Calculator",
     description:
       "A simple calculator built with jQuery, allowing basic arithmetic operations.",
+    path: "FRONTEND-DEV-LIB%2fjquery-calculator",
     image: "./image/preview_jquery_calculator.webp",
     status: "Completed",
     link: "./FRONTEND-DEV-LIB/jquery-calculator/jquery-calculator.html",
@@ -260,6 +286,7 @@ projects.forEach((project) => {
   const card = renderCards(
     project.title,
     project.description,
+    project.path,
     project.status,
     project.image,
     project.link,
